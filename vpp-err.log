@@ -1,0 +1,108 @@
+2019-04-19 14:42:48.909 189449 WARNING networking_vpp.etcdutils [-] etcd is not using HTTPS, insecure setting
+2019-04-19 14:44:48.401 189449 ERROR etcd.client [-] Request to server http://147.75.70.210:2379 failed: ProtocolError('Connection broken: IncompleteRead(0 bytes read)', IncompleteRead(0 bytes read)): ProtocolErr
+or: ('Connection broken: IncompleteRead(0 bytes read)', IncompleteRead(0 bytes read))
+2019-04-19 14:44:48.401 189449 INFO etcd.client [-] Reconnection allowed, looking for another server.
+2019-04-19 14:44:48.401 189449 INFO etcd.client [-] Selected new etcd server http://139.178.70.114:2379
+2019-04-19 14:44:48.404 189449 ERROR etcd.client [-] Request to server http://147.75.70.210:2379 failed: ProtocolError('Connection broken: IncompleteRead(0 bytes read)', IncompleteRead(0 bytes read)): ProtocolErr
+or: ('Connection broken: IncompleteRead(0 bytes read)', IncompleteRead(0 bytes read))
+2019-04-19 14:44:48.404 189449 INFO etcd.client [-] Reconnection allowed, looking for another server.
+2019-04-19 14:44:48.404 189449 INFO etcd.client [-] Selected new etcd server http://139.178.70.114:2379
+2019-04-19 14:44:48.406 189449 ERROR etcd.client [-] Request to server http://147.75.70.210:2379 failed: ProtocolError('Connection broken: IncompleteRead(0 bytes read)', IncompleteRead(0 bytes read)): ProtocolErr
+or: ('Connection broken: IncompleteRead(0 bytes read)', IncompleteRead(0 bytes read))
+2019-04-19 14:44:48.407 189449 INFO etcd.client [-] Reconnection allowed, looking for another server.
+2019-04-19 14:44:48.407 189449 INFO etcd.client [-] Selected new etcd server http://139.178.70.114:2379
+2019-04-19 14:44:48.641 189449 ERROR etcd.client [-] Request to server http://139.178.70.114:2379 failed: ProtocolError('Connection broken: IncompleteRead(0 bytes read)', IncompleteRead(0 bytes read)): ProtocolEr
+ror: ('Connection broken: IncompleteRead(0 bytes read)', IncompleteRead(0 bytes read))
+2019-04-19 14:44:48.642 189449 INFO etcd.client [-] Reconnection allowed, looking for another server.
+2019-04-19 14:44:48.642 189449 INFO etcd.client [-] Selected new etcd server http://147.75.70.234:2379
+2019-04-19 14:44:48.643 189449 ERROR etcd.client [-] Request to server http://139.178.70.114:2379 failed: ProtocolError('Connection broken: IncompleteRead(0 bytes read)', IncompleteRead(0 bytes read)): ProtocolEr
+ror: ('Connection broken: IncompleteRead(0 bytes read)', IncompleteRead(0 bytes read))
+2019-04-19 14:44:48.644 189449 INFO etcd.client [-] Reconnection allowed, looking for another server.
+2019-04-19 14:44:48.644 189449 INFO etcd.client [-] Selected new etcd server http://147.75.70.234:2379
+2019-04-19 14:44:48.645 189449 ERROR etcd.client [-] Request to server http://139.178.70.114:2379 failed: ProtocolError('Connection broken: IncompleteRead(0 bytes read)', IncompleteRead(0 bytes read)): ProtocolEr
+ror: ('Connection broken: IncompleteRead(0 bytes read)', IncompleteRead(0 bytes read))
+2019-04-19 14:44:48.645 189449 INFO etcd.client [-] Reconnection allowed, looking for another server.
+2019-04-19 14:44:48.645 189449 INFO etcd.client [-] Selected new etcd server http://147.75.70.234:2379
+2019-04-19 14:44:53.991 189449 ERROR etcd.client [-] Unexpected request failure, re-raising.: Timeout: 65 seconds (silent)
+2019-04-19 14:44:53.991 189449 ERROR etcd.client Traceback (most recent call last):
+2019-04-19 14:44:53.991 189449 ERROR etcd.client   File "/usr/local/lib/python2.7/dist-packages/etcd/client.py", line 863, in wrapper
+2019-04-19 14:44:53.991 189449 ERROR etcd.client     _ = response.data
+2019-04-19 14:44:53.991 189449 ERROR etcd.client   File "/usr/lib/python2.7/dist-packages/urllib3/response.py", line 188, in data
+2019-04-19 14:44:53.991 189449 ERROR etcd.client     return self.read(cache_content=True)
+2019-04-19 14:44:53.991 189449 ERROR etcd.client   File "/usr/lib/python2.7/dist-packages/urllib3/response.py", line 380, in read
+2019-04-19 14:44:53.991 189449 ERROR etcd.client     data = self._fp.read()
+2019-04-19 14:44:53.991 189449 ERROR etcd.client   File "/usr/lib/python2.7/httplib.py", line 573, in read
+2019-04-19 14:44:53.991 189449 ERROR etcd.client     return self._read_chunked(amt)
+2019-04-19 14:44:53.991 189449 ERROR etcd.client   File "/usr/lib/python2.7/httplib.py", line 615, in _read_chunked
+2019-04-19 14:44:53.991 189449 ERROR etcd.client     line = self.fp.readline(_MAXLINE + 1)
+2019-04-19 14:44:53.991 189449 ERROR etcd.client   File "/usr/lib/python2.7/socket.py", line 480, in readline
+2019-04-19 14:44:53.991 189449 ERROR etcd.client     data = self._sock.recv(self._rbufsize)
+2019-04-19 14:44:53.991 189449 ERROR etcd.client   File "/usr/local/lib/python2.7/dist-packages/eventlet/greenio/base.py", line 363, in recv
+2019-04-19 14:44:53.991 189449 ERROR etcd.client     return self._recv_loop(self.fd.recv, b'', bufsize, flags)
+2019-04-19 14:44:53.991 189449 ERROR etcd.client   File "/usr/local/lib/python2.7/dist-packages/eventlet/greenio/base.py", line 357, in _recv_loop
+2019-04-19 14:44:53.991 189449 ERROR etcd.client     self._read_trampoline()
+2019-04-19 14:44:53.991 189449 ERROR etcd.client   File "/usr/local/lib/python2.7/dist-packages/eventlet/greenio/base.py", line 328, in _read_trampoline
+2019-04-19 14:44:53.991 189449 ERROR etcd.client     timeout_exc=socket_timeout('timed out'))
+2019-04-19 14:44:53.991 189449 ERROR etcd.client   File "/usr/local/lib/python2.7/dist-packages/eventlet/greenio/base.py", line 207, in _trampoline
+2019-04-19 14:44:53.991 189449 ERROR etcd.client     mark_as_closed=self._mark_as_closed)
+2019-04-19 14:44:53.991 189449 ERROR etcd.client   File "/usr/local/lib/python2.7/dist-packages/eventlet/hubs/__init__.py", line 163, in trampoline
+2019-04-19 14:44:53.991 189449 ERROR etcd.client     return hub.switch()
+2019-04-19 14:44:53.991 189449 ERROR etcd.client   File "/usr/local/lib/python2.7/dist-packages/eventlet/hubs/hub.py", line 295, in switch
+2019-04-19 14:44:53.991 189449 ERROR etcd.client     return self.greenlet.switch()
+2019-04-19 14:44:53.991 189449 ERROR etcd.client Timeout: 65 seconds (silent)
+2019-04-19 14:44:53.993 189449 ERROR etcd.client [-] Unexpected request failure, re-raising.: Timeout: 65 seconds (silent)
+2019-04-19 14:44:53.993 189449 ERROR etcd.client Traceback (most recent call last):
+2019-04-19 14:44:53.993 189449 ERROR etcd.client   File "/usr/local/lib/python2.7/dist-packages/etcd/client.py", line 863, in wrapper
+2019-04-19 14:44:53.993 189449 ERROR etcd.client     _ = response.data
+2019-04-19 14:44:53.993 189449 ERROR etcd.client   File "/usr/lib/python2.7/dist-packages/urllib3/response.py", line 188, in data
+2019-04-19 14:44:53.993 189449 ERROR etcd.client     return self.read(cache_content=True)
+2019-04-19 14:44:53.993 189449 ERROR etcd.client   File "/usr/lib/python2.7/dist-packages/urllib3/response.py", line 380, in read
+2019-04-19 14:44:53.993 189449 ERROR etcd.client     data = self._fp.read()
+2019-04-19 14:44:53.993 189449 ERROR etcd.client   File "/usr/lib/python2.7/httplib.py", line 573, in read
+2019-04-19 14:44:53.993 189449 ERROR etcd.client     return self._read_chunked(amt)
+2019-04-19 14:44:53.993 189449 ERROR etcd.client   File "/usr/lib/python2.7/httplib.py", line 615, in _read_chunked
+2019-04-19 14:44:53.993 189449 ERROR etcd.client     line = self.fp.readline(_MAXLINE + 1)
+2019-04-19 14:44:53.993 189449 ERROR etcd.client   File "/usr/lib/python2.7/socket.py", line 480, in readline
+2019-04-19 14:44:53.993 189449 ERROR etcd.client     data = self._sock.recv(self._rbufsize)
+2019-04-19 14:44:53.993 189449 ERROR etcd.client   File "/usr/local/lib/python2.7/dist-packages/eventlet/greenio/base.py", line 363, in recv
+2019-04-19 14:44:53.993 189449 ERROR etcd.client     return self._recv_loop(self.fd.recv, b'', bufsize, flags)
+2019-04-19 14:44:53.993 189449 ERROR etcd.client   File "/usr/local/lib/python2.7/dist-packages/eventlet/greenio/base.py", line 357, in _recv_loop
+2019-04-19 14:44:53.993 189449 ERROR etcd.client     self._read_trampoline()
+2019-04-19 14:44:53.993 189449 ERROR etcd.client   File "/usr/local/lib/python2.7/dist-packages/eventlet/greenio/base.py", line 328, in _read_trampoline
+2019-04-19 14:44:53.993 189449 ERROR etcd.client     timeout_exc=socket_timeout('timed out'))
+2019-04-19 14:44:53.993 189449 ERROR etcd.client   File "/usr/local/lib/python2.7/dist-packages/eventlet/greenio/base.py", line 207, in _trampoline
+2019-04-19 14:44:53.993 189449 ERROR etcd.client     mark_as_closed=self._mark_as_closed)
+2019-04-19 14:44:53.993 189449 ERROR etcd.client   File "/usr/local/lib/python2.7/dist-packages/eventlet/hubs/__init__.py", line 163, in trampoline
+2019-04-19 14:44:53.993 189449 ERROR etcd.client     return hub.switch()
+2019-04-19 14:44:53.993 189449 ERROR etcd.client   File "/usr/local/lib/python2.7/dist-packages/eventlet/hubs/hub.py", line 295, in switch
+2019-04-19 14:44:53.993 189449 ERROR etcd.client     return self.greenlet.switch()
+2019-04-19 14:44:53.993 189449 ERROR etcd.client Timeout: 65 seconds (silent)
+2019-04-19 14:44:53.993 189449 ERROR etcd.client 
+2019-04-19 14:44:53.995 189449 ERROR etcd.client [-] Unexpected request failure, re-raising.: Timeout: 65 seconds (silent)
+2019-04-19 14:44:53.995 189449 ERROR etcd.client Traceback (most recent call last):
+2019-04-19 14:44:53.995 189449 ERROR etcd.client   File "/usr/local/lib/python2.7/dist-packages/etcd/client.py", line 863, in wrapper
+2019-04-19 14:44:53.995 189449 ERROR etcd.client     _ = response.data
+2019-04-19 14:44:53.995 189449 ERROR etcd.client   File "/usr/lib/python2.7/dist-packages/urllib3/response.py", line 188, in data
+2019-04-19 14:44:53.995 189449 ERROR etcd.client     return self.read(cache_content=True)
+2019-04-19 14:44:53.995 189449 ERROR etcd.client   File "/usr/lib/python2.7/dist-packages/urllib3/response.py", line 380, in read
+2019-04-19 14:44:53.995 189449 ERROR etcd.client     data = self._fp.read()
+2019-04-19 14:44:53.995 189449 ERROR etcd.client   File "/usr/lib/python2.7/httplib.py", line 573, in read
+2019-04-19 14:44:53.995 189449 ERROR etcd.client     return self._read_chunked(amt)
+2019-04-19 14:44:53.995 189449 ERROR etcd.client   File "/usr/lib/python2.7/httplib.py", line 615, in _read_chunked
+2019-04-19 14:44:53.995 189449 ERROR etcd.client     line = self.fp.readline(_MAXLINE + 1)
+2019-04-19 14:44:53.995 189449 ERROR etcd.client   File "/usr/lib/python2.7/socket.py", line 480, in readline
+2019-04-19 14:44:53.995 189449 ERROR etcd.client     data = self._sock.recv(self._rbufsize)
+2019-04-19 14:44:53.995 189449 ERROR etcd.client   File "/usr/local/lib/python2.7/dist-packages/eventlet/greenio/base.py", line 363, in recv
+2019-04-19 14:44:53.995 189449 ERROR etcd.client     return self._recv_loop(self.fd.recv, b'', bufsize, flags)
+2019-04-19 14:44:53.995 189449 ERROR etcd.client   File "/usr/local/lib/python2.7/dist-packages/eventlet/greenio/base.py", line 357, in _recv_loop
+2019-04-19 14:44:53.995 189449 ERROR etcd.client     self._read_trampoline()
+2019-04-19 14:44:53.995 189449 ERROR etcd.client   File "/usr/local/lib/python2.7/dist-packages/eventlet/greenio/base.py", line 328, in _read_trampoline
+2019-04-19 14:44:53.995 189449 ERROR etcd.client     timeout_exc=socket_timeout('timed out'))
+2019-04-19 14:44:53.995 189449 ERROR etcd.client   File "/usr/local/lib/python2.7/dist-packages/eventlet/greenio/base.py", line 207, in _trampoline
+2019-04-19 14:44:53.995 189449 ERROR etcd.client     mark_as_closed=self._mark_as_closed)
+2019-04-19 14:44:53.995 189449 ERROR etcd.client   File "/usr/local/lib/python2.7/dist-packages/eventlet/hubs/__init__.py", line 163, in trampoline
+2019-04-19 14:44:53.995 189449 ERROR etcd.client     return hub.switch()
+2019-04-19 14:44:53.995 189449 ERROR etcd.client   File "/usr/local/lib/python2.7/dist-packages/eventlet/hubs/hub.py", line 295, in switch
+2019-04-19 14:44:53.995 189449 ERROR etcd.client     return self.greenlet.switch()
+2019-04-19 14:44:53.995 189449 ERROR etcd.client Timeout: 65 seconds (silent)
+2019-04-19 14:44:53.995 189449 ERROR etcd.client 

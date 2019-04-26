@@ -1,0 +1,552 @@
+fatal: [139.178.70.158]: FAILED! => {"changed": true, "cmd": ["chef-client", "-z", "-E", "multinode", "-r", "role[multinode-controller]"], "delta": "0:00:36.487192", "end": "2019-04-26 19:53:24.701630", "msg": "non-zero return code", "rc": 1, "start": "2019-04-26 19:52:48.214438", "stderr": "/opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/ohai-14.6.2/lib/ohai/plugins/windows/filesystem.rb:26: warning: already initialized constant CONVERSION_STATUS
+/opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/ohai-14.6.2/lib/ohai/plugins/windows/filesystem.rb:26: warning: previous definition of CONVERSION_STATUS was here", "stderr_lines": ["/opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/ohai-14.6.2/lib/ohai/plugins/windows/filesystem.rb:26: warning: already initialized constant CONVERSION_STATUS", "/opt/chefdk/embedded/lib/ruby/gems/2.5.0/gems/ohai-14.6.2/lib/ohai/plugins/windows/filesystem.rb:26: warning: previous definition of CONVERSION_STATUS was here"], "stdout": "[2019-04-26T19:52:50+00:00] WARN: No config file found or specified on command line, using command line options.
+Starting Chef Client, version 14.6.47\u001b[0m
+resolving cookbooks for run list: [\"build-essential\", \"openstack-common\", \"openstack-common::logging\", \"openstack-common::sysctl\", \"openstack-common::python\", \"openstack-common::client\", \"openstack-ops-database::server\", \"openstack-ops-database::openstack-db\", \"openstack-ops-messaging::rabbitmq-server\", \"openstack-identity::server-apache\", \"openstack-identity::registration\", \"openstack-identity::openrc\", \"openstack-image::api\", \"openstack-image::registry\", \"openstack-image::identity_registration\", \"openstack-network\", \"openstack-network::server\", \"openstack-network::ml2_core_plugin\", \"openstack-network::dhcp_agent\", \"openstack-network::metadata_agent\", \"openstack-compute::nova-setup\", \"openstack-compute::identity_registration\", \"openstack-compute::conductor\", \"openstack-compute::api-os-compute\", \"openstack-compute::api-metadata\", \"openstack-compute::placement_api\", \"openstack-compute::scheduler\", \"openstack-compute::vncproxy\", \"openstack-orchestration::engine\", \"openstack-orchestration::api\", \"openstack-orchestration::api-cfn\", \"openstack-orchestration::identity_registration\", \"openstack-image::image_upload\", \"openstack-dashboard::horizon\"]\u001b[0m
+Synchronizing Cookbooks:\u001b[0m
+  - build-essential (8.2.1)\u001b[0m
+  - openstack-common (18.0.0)\u001b[0m
+  - openstack-ops-database (18.0.0)\u001b[0m
+  - openstack-ops-messaging (18.0.0)\u001b[0m
+  - openstack-identity (18.0.0)\u001b[0m
+  - openstack-image (18.0.0)\u001b[0m
+  - openstack-network (18.0.0)\u001b[0m
+  - openstack-compute (18.0.0)\u001b[0m
+  - openstack-orchestration (18.0.0)\u001b[0m
+  - openstack-dashboard (18.0.0)\u001b[0m
+  - seven_zip (3.1.0)\u001b[0m
+  - mingw (2.1.0)\u001b[0m
+  - etcd (5.6.0)\u001b[0m
+  - mariadb (1.5.4)\u001b[0m
+  - memcached (4.1.0)\u001b[0m
+  - mysql (8.5.1)\u001b[0m
+  - poise-python (1.7.0)\u001b[0m
+  - selinux (2.1.1)\u001b[0m
+  - mysql2_chef_gem (2.1.0)\u001b[0m
+  - rabbitmq (5.8.0)\u001b[0m
+  - openstackclient (18.0.0)\u001b[0m
+  - apache2 (5.0.1)\u001b[0m
+  - windows (6.0.0)\u001b[0m
+  - docker (4.9.2)\u001b[0m
+  - apt (7.1.1)\u001b[0m
+  - selinux_policy (2.3.4)\u001b[0m
+  - yum (5.1.0)\u001b[0m
+  - yum-epel (3.3.0)\u001b[0m
+  - yum-scl (0.2.0)\u001b[0m
+  - runit (5.1.0)\u001b[0m
+  - poise (2.8.2)\u001b[0m
+  - poise-languages (2.1.2)\u001b[0m
+  - erlang (7.0.0)\u001b[0m
+  - dpkg_autostart (0.2.0)\u001b[0m
+  - yum-erlang_solutions (2.0.0)\u001b[0m
+  - logrotate (2.2.0)\u001b[0m
+  - inifile_chef_gem (0.1.0)\u001b[0m
+  - packagecloud (1.0.1)\u001b[0m
+  - poise-archive (1.5.0)\u001b[0m
+Installing Cookbook Gems:\u001b[0m
+Compiling Cookbooks...\u001b[0m
+Converging 391 resources\u001b[0m
+Recipe: build-essential::default\u001b[0m
+  * build_essential[install_packages] action install
+    * yum_package[autoconf, bison, flex, gcc, gcc-c++, gettext, kernel-devel, make, m4, ncurses-devel, patch] action install (up to date)
+     (up to date)
+Recipe: openstack-common::default\u001b[0m
+  * yum_repository[RDO-rocky] action add
+    * template[/etc/yum.repos.d/RDO-rocky.repo] action create (up to date)
+    * execute[yum clean metadata RDO-rocky] action nothing (skipped due to action :nothing)
+    * execute[yum-makecache-RDO-rocky] action nothing (skipped due to action :nothing)
+    * ruby_block[package-cache-reload-RDO-rocky] action nothing (skipped due to action :nothing)
+     (up to date)
+  * yum_repository[RDO-rocky-deps] action remove
+    * execute[yum clean all RDO-rocky-deps] action run (skipped due to only_if)
+    * file[/etc/yum.repos.d/RDO-rocky-deps.repo] action delete (up to date)
+    * ruby_block[package-cache-reload-RDO-rocky-deps] action nothing (skipped due to action :nothing)
+     (up to date)
+  * bash[yum_contentdir] action run (skipped due to not_if)
+  * yum_package[centos-release-qemu-ev] action upgrade (up to date)
+  * python_runtime[2] action install
+    * poise_languages_system[python] action install
+       (up to date)
+    * yum_package[python, python-devel] action nothing (skipped due to action :nothing)
+     (up to date)
+  * python_runtime_pip[2] action install (up to date)
+  * python_package[setuptools] action install (up to date)
+  * python_package[wheel] action install (up to date)
+  * python_package[virtualenv] action install (up to date)
+   (up to date)
+Recipe: openstack-common::logging\u001b[0m
+  * directory[/etc/openstack] action create (up to date)
+  * template[/etc/openstack/logging.conf] action create (up to date)
+Recipe: openstack-common::sysctl\u001b[0m
+  * directory[/etc/sysctl.d] action create (up to date)
+  * template[/etc/sysctl.d/60-openstack.conf] action create (up to date)
+  * execute[sysctl -p /etc/sysctl.d/60-openstack.conf] action nothing (skipped due to action :nothing)
+Recipe: openstack-common::python\u001b[0m
+  * python_runtime[3.5] action install
+    * poise_languages_scl[rh-python35] action install
+      * yum_package[centos-release-scl-rh] action upgrade (up to date)
+      * ruby_block[flush_yum_cache] action run
+        \u001b[32m- execute the ruby block flush_yum_cache\u001b[0m
+\u001b[0m      * yum_package[rh-python35] action install (up to date)
+      * yum_package[rh-python35-python-devel] action install (up to date)
+    
+\u001b[0m    * python_runtime_pip[3.5] action install (up to date)
+    * python_package[setuptools] action install (up to date)
+    * python_package[wheel] action install (up to date)
+     (up to date)
+Recipe: openstack-common::client\u001b[0m
+  * yum_package[python-openstackclient] action upgrade (up to date)
+Recipe: yum::default\u001b[0m
+  * yum_globalconfig[/etc/yum.conf] action create
+    * template[/etc/yum.conf] action create (up to date)
+     (up to date)
+Recipe: mariadb::repository\u001b[0m
+  * yum_repository[mariadb-10.0] action create
+    * template[/etc/yum.repos.d/mariadb-10.0.repo] action create (up to date)
+    * execute[yum clean metadata mariadb-10.0] action nothing (skipped due to action :nothing)
+    * execute[yum-makecache-mariadb-10.0] action nothing (skipped due to action :nothing)
+    * ruby_block[package-cache-reload-mariadb-10.0] action nothing (skipped due to action :nothing)
+     (up to date)
+Recipe: yum-epel::default\u001b[0m
+  * yum_repository[epel] action create
+    * template[/etc/yum.repos.d/epel.repo] action create (up to date)
+    * execute[yum clean metadata epel] action nothing (skipped due to action :nothing)
+    * execute[yum-makecache-epel] action nothing (skipped due to action :nothing)
+    * ruby_block[package-cache-reload-epel] action nothing (skipped due to action :nothing)
+     (up to date)
+Recipe: mariadb::_redhat_client\u001b[0m
+  * yum_package[mysql-libs] action remove (skipped due to not_if)
+Recipe: mariadb::client\u001b[0m
+  * yum_package[MariaDB-client] action install (up to date)
+Recipe: mariadb::devel\u001b[0m
+  * yum_package[MariaDB-devel] action install (up to date)
+Recipe: openstack-ops-database::mariadb-client\u001b[0m
+  * mysql2_chef_gem_mysql2_chef_gem_mariadb[default] action install
+    \u001b[32m- evaluate block and run any associated actions\u001b[0m
+    \u001b[32m- evaluate block and run any associated actions\u001b[0m
+    * gem_package[mysql2] action install (up to date)
+  
+\u001b[0m  * yum_package[MySQL-python] action install (up to date)
+Recipe: mariadb::_redhat_server_preinstall\u001b[0m
+  * yum_package[MariaDB-shared] action install (up to date)
+Recipe: mariadb::server\u001b[0m
+  * yum_package[MariaDB-server] action install (up to date)
+Recipe: mariadb::config\u001b[0m
+  * template[/root/.my.cnf] action create (skipped due to only_if)
+  * template[/etc/my.cnf] action create (up to date)
+  * directory[/etc/my.cnf.d] action create (skipped due to not_if)
+  * mariadb_configuration[20-innodb] action add
+    * template[/etc/my.cnf.d/20-innodb.cnf] action create (up to date)
+     (up to date)
+  * mariadb_configuration[30-replication] action add
+    * template[/etc/my.cnf.d/30-replication.cnf] action create (up to date)
+     (up to date)
+Recipe: mariadb::server\u001b[0m
+  * directory[/var/log/mysql] action create (up to date)
+  * execute[mariadb-service-restart-needed] action run (skipped due to only_if)
+  * service[mysql] action start (up to date)
+  * service[mysql] action enable (up to date)
+  * ruby_block[restart_mysql] action nothing (skipped due to action :nothing)
+Recipe: mariadb::_redhat_server_postinstall\u001b[0m
+  * execute[change first install root password] action run (skipped due to not_if)
+Recipe: mariadb::_mariadb_postinstall\u001b[0m
+  * file[/etc/mysql_root_change] action create (up to date)
+  * execute[install-grants] action nothing (skipped due to action :nothing)
+  * template[/etc/mariadb_grants] action create (up to date)
+Recipe: openstack-ops-database::mariadb-server\u001b[0m
+  * template[/etc/my.cnf.d/openstack.cnf] action create (up to date)
+Recipe: openstack-ops-database::openstack-db\u001b[0m
+  * log[No databag item containing the database password for aodh was found, so no database was created] action write
+  
+\u001b[0m  * openstack_common_database[bare_metal] action create
+    * database[create database ironic] action create (up to date)
+    * database_user[create database user ironic] action create (up to date)
+    * database_user[grant database user ironic] action grant (up to date)
+     (up to date)
+  * openstack_common_database[block_storage] action create
+    * database[create database cinder] action create (up to date)
+    * database_user[create database user cinder] action create (up to date)
+    * database_user[grant database user cinder] action grant (up to date)
+     (up to date)
+  * openstack_common_database[compute] action create
+    * database[create database nova] action create (up to date)
+    * database_user[create database user nova] action create (up to date)
+    * database_user[grant database user nova] action grant (up to date)
+     (up to date)
+  * openstack_common_database[compute_api] action create
+    * database[create database nova_api] action create (up to date)
+    * database_user[create database user nova_api] action create (up to date)
+    * database_user[grant database user nova_api] action grant (up to date)
+     (up to date)
+  * openstack_common_database[compute_cell0] action create
+    * database[create database nova_cell0] action create (up to date)
+    * database_user[create database user nova_cell0] action create (up to date)
+    * database_user[grant database user nova_cell0] action grant (up to date)
+     (up to date)
+  * openstack_common_database[dashboard] action create
+    * database[create database horizon] action create (up to date)
+    * database_user[create database user horizon] action create (up to date)
+    * database_user[grant database user horizon] action grant (up to date)
+     (up to date)
+  * log[No databag item containing the database password for trove was found, so no database was created] action write
+  
+\u001b[0m  * openstack_common_database[dns] action create
+    * database[create database designate] action create (up to date)
+    * database_user[create database user designate] action create (up to date)
+    * database_user[grant database user designate] action grant (up to date)
+     (up to date)
+  * openstack_common_database[identity] action create
+    * database[create database keystone] action create (up to date)
+    * database_user[create database user keystone] action create (up to date)
+    * database_user[grant database user keystone] action grant (up to date)
+     (up to date)
+  * openstack_common_database[image] action create
+    * database[create database glance] action create (up to date)
+    * database_user[create database user glance] action create (up to date)
+    * database_user[grant database user glance] action grant (up to date)
+     (up to date)
+  * openstack_common_database[network] action create
+    * database[create database neutron] action create (up to date)
+    * database_user[create database user neutron] action create (up to date)
+    * database_user[grant database user neutron] action grant (up to date)
+     (up to date)
+  * log[No databag item containing the database password for swift was found, so no database was created] action write
+  
+\u001b[0m  * openstack_common_database[orchestration] action create
+    * database[create database heat] action create (up to date)
+    * database_user[create database user heat] action create (up to date)
+    * database_user[grant database user heat] action grant (up to date)
+     (up to date)
+  * openstack_common_database[telemetry] action create
+    * database[create database ceilometer] action create (up to date)
+    * database_user[create database user ceilometer] action create (up to date)
+    * database_user[grant database user ceilometer] action grant (up to date)
+     (up to date)
+  * openstack_common_database[telemetry_metric] action create
+    * database[create database gnocchi] action create (up to date)
+    * database_user[create database user gnocchi] action create (up to date)
+    * database_user[grant database user gnocchi] action grant (up to date)
+     (up to date)
+  * log[No databag item containing the database password for murano was found, so no database was created] action write
+  
+\u001b[0mRecipe: erlang::package\u001b[0m
+  * yum_package[erlang] action install (up to date)
+Recipe: rabbitmq::default\u001b[0m
+  * directory[/etc/rabbitmq] action create (up to date)
+  * yum_package[logrotate] action install (up to date)
+  * yum_package[socat] action install (up to date)
+  * remote_file[/root/.chef/local-mode-cache/cache/rabbitmq-server-3.7.14-1.el7.noarch.rpm] action create_if_missing (up to date)
+  * rpm_package[/root/.chef/local-mode-cache/cache/rabbitmq-server-3.7.14-1.el7.noarch.rpm] action install (up to date)
+  * directory[/var/lib/rabbitmq/mnesia] action create (up to date)
+  * template[/etc/rabbitmq/rabbitmq-env.conf] action create (up to date)
+  * template[/etc/rabbitmq/rabbitmq.config] action create (up to date)
+  * template[/etc/default/rabbitmq-server] action create (up to date)
+  * service[rabbitmq-server] action enable (up to date)
+  * service[rabbitmq-server] action start (up to date)
+  * ohai[reload_packages] action reload
+    \u001b[32m- re-run ohai and merge results into node attributes\u001b[0m
+\u001b[0mRecipe: rabbitmq::management_ui\u001b[0m
+  * rabbitmq_plugin[rabbitmq_management] action enable (up to date)
+Recipe: openstack-ops-messaging::rabbitmq-server\u001b[0m
+  * rabbitmq_user[add openstack rabbit user] action add (up to date)
+  * rabbitmq_user[change openstack rabbit user password] action change_password
+    * execute[rabbitmqctl -q change_password admin] action run
+      \u001b[32m- execute sensitive resource\u001b[0m
+\u001b[0m  
+\u001b[0m  * rabbitmq_vhost[add openstack rabbit vhost] action add (up to date)
+  * rabbitmq_user[set openstack user permissions] action set_permissions (up to date)
+  * rabbitmq_user[set rabbit administrator tag] action set_tags (up to date)
+Recipe: openstack-identity::server-apache\u001b[0m
+  * execute[set-selinux-permissive] action run (skipped due to only_if)
+  * yum_package[identity cookbook package MySQL-python] action upgrade (up to date)
+  * yum_package[identity cookbook package python-memcached] action upgrade (up to date)
+  * yum_package[identity cookbook package openstack-keystone] action upgrade (up to date)
+  * yum_package[identity cookbook package openstack-selinux] action upgrade (up to date)
+  * service[keystone] action stop (up to date)
+  * service[keystone] action disable (up to date)
+  * directory[/etc/keystone] action create (up to date)
+  * directory[/etc/keystone/domains] action create (skipped due to only_if)
+  * file[/var/lib/keystone/keystone.db] action delete (up to date)
+Recipe: openstack-identity::_credential_tokens\u001b[0m
+  * directory[/etc/keystone/credential-tokens] action create (up to date)
+  * file[/etc/keystone/credential-tokens/0] action create (up to date)
+  * file[/etc/keystone/credential-tokens/1] action create (up to date)
+Recipe: openstack-identity::_fernet_tokens\u001b[0m
+  * directory[/etc/keystone/fernet-tokens] action create (up to date)
+  * file[/etc/keystone/fernet-tokens/0] action create (up to date)
+  * file[/etc/keystone/fernet-tokens/1] action create (up to date)
+Recipe: openstack-identity::server-apache\u001b[0m
+  * template[/etc/keystone/keystone-paste.ini] action create (up to date)
+  * template[/etc/keystone/keystone.conf] action create (up to date)
+  * ruby_block[delete all attributes in node['openstack']['identity']['conf_secrets']] action run
+    \u001b[32m- execute the ruby block delete all attributes in node['openstack']['identity']['conf_secrets']\u001b[0m
+\u001b[0m  * execute[keystone-manage db_sync] action run
+    \u001b[32m- execute keystone-manage db_sync\u001b[0m
+\u001b[0m  * execute[bootstrap_keystone] action run
+    \u001b[32m- execute keystone-manage bootstrap \\
+\u001b[0m    \u001b[32m          --bootstrap-password mypass \\
+\u001b[0m    \u001b[32m          --bootstrap-username admin \\
+\u001b[0m    \u001b[32m          --bootstrap-project-name admin \\
+\u001b[0m    \u001b[32m          --bootstrap-role-name admin \\
+\u001b[0m    \u001b[32m          --bootstrap-service-name keystone \\
+\u001b[0m    \u001b[32m          --bootstrap-region-id RegionOne \\
+\u001b[0m    \u001b[32m          --bootstrap-admin-url http://139.178.70.158:5000/v3 \\
+\u001b[0m    \u001b[32m          --bootstrap-public-url http://139.178.70.158:5000/v3 \\
+\u001b[0m    \u001b[32m          --bootstrap-internal-url http://139.178.70.158:5000/v3\u001b[0m
+\u001b[0mRecipe: apache2::default\u001b[0m
+  * yum_package[apache2] action install (up to date)
+  * directory[/etc/httpd/sites-available] action create (up to date)
+  * directory[/etc/httpd/sites-enabled] action create (up to date)
+  * directory[/etc/httpd/mods-available] action create (up to date)
+  * directory[/etc/httpd/mods-enabled] action create (up to date)
+  * directory[/etc/httpd/conf-available] action create (up to date)
+  * directory[/etc/httpd/conf-enabled] action create (up to date)
+  * link[/etc/httpd/sites-enabled/default] action delete (up to date)
+  * file[/etc/httpd/sites-available/default] action delete (up to date)
+  * link[/etc/httpd/sites-enabled/default.conf] action delete (up to date)
+  * file[/etc/httpd/sites-available/default.conf] action delete (up to date)
+  * link[/etc/httpd/sites-enabled/000-default] action delete (up to date)
+  * file[/etc/httpd/sites-available/000-default] action delete (up to date)
+  * link[/etc/httpd/sites-enabled/000-default.conf] action delete (up to date)
+  * file[/etc/httpd/sites-available/000-default.conf] action delete (up to date)
+  * directory[/var/log/httpd] action create (up to date)
+  * yum_package[perl] action install (up to date)
+  * link[/usr/sbin/a2ensite] action delete (skipped due to only_if)
+  * template[/usr/sbin/a2ensite] action create (up to date)
+  * link[/usr/sbin/a2dissite] action delete (skipped due to only_if)
+  * template[/usr/sbin/a2dissite] action create (up to date)
+  * link[/usr/sbin/a2enmod] action delete (skipped due to only_if)
+  * template[/usr/sbin/a2enmod] action create (up to date)
+  * link[/usr/sbin/a2dismod] action delete (skipped due to only_if)
+  * template[/usr/sbin/a2dismod] action create (up to date)
+  * link[/usr/sbin/a2enconf] action delete (skipped due to only_if)
+  * template[/usr/sbin/a2enconf] action create (up to date)
+  * link[/usr/sbin/a2disconf] action delete (skipped due to only_if)
+  * template[/usr/sbin/a2disconf] action create (up to date)
+  * cookbook_file[/usr/local/bin/apache2_module_conf_generate.pl] action create (up to date)
+  * execute[generate-module-list] action nothing (skipped due to action :nothing)
+  * directory[/etc/httpd/ssl] action create (up to date)
+  * directory[/var/cache/httpd] action create (up to date)
+  * directory[/var/run/httpd] action create (up to date)
+  * template[/etc/sysconfig/httpd] action create (up to date)
+  * template[/etc/httpd/envvars] action create (skipped due to only_if)
+  * template[apache2.conf] action create (up to date)
+  * file[/etc/httpd/conf-available/security] action delete (up to date)
+  * template[/etc/httpd/conf-available/security.conf] action create (up to date)
+  * execute[a2enconf security.conf] action run (skipped due to not_if)
+  * file[/etc/httpd/conf-available/charset] action delete (up to date)
+  * template[/etc/httpd/conf-available/charset.conf] action create (up to date)
+  * execute[a2enconf charset.conf] action run (skipped due to not_if)
+  * file[/etc/httpd/ports] action delete (up to date)
+  * template[/etc/httpd/ports.conf] action create (up to date)
+Recipe: apache2::mpm_prefork\u001b[0m
+  * file[/etc/httpd/mods-available/mpm_event.load] action create (up to date)
+  * execute[a2dismod mpm_event] action run (skipped due to only_if)
+  * file[/etc/httpd/mods-available/mpm_worker.load] action create (up to date)
+  * execute[a2dismod mpm_worker] action run (skipped due to only_if)
+  * template[/etc/httpd/mods-available/mpm_prefork.conf] action create (up to date)
+  * file[/etc/httpd/mods-available/mpm_prefork.load] action create (up to date)
+  * execute[a2enmod mpm_prefork] action run (skipped due to not_if)
+Recipe: apache2::mod_status\u001b[0m
+  * template[/etc/httpd/mods-available/status.conf] action create (up to date)
+  * file[/etc/httpd/mods-available/status.load] action create (up to date)
+  * execute[a2enmod status] action run (skipped due to not_if)
+Recipe: apache2::mod_alias\u001b[0m
+  * template[/etc/httpd/mods-available/alias.conf] action create (up to date)
+  * file[/etc/httpd/mods-available/alias.load] action create (up to date)
+  * execute[a2enmod alias] action run (skipped due to not_if)
+Recipe: apache2::mod_auth_basic\u001b[0m
+  * file[/etc/httpd/mods-available/auth_basic.load] action create (up to date)
+  * execute[a2enmod auth_basic] action run (skipped due to not_if)
+Recipe: apache2::mod_authn_core\u001b[0m
+  * file[/etc/httpd/mods-available/authn_core.load] action create (up to date)
+  * execute[a2enmod authn_core] action run (skipped due to not_if)
+Recipe: apache2::mod_authn_file\u001b[0m
+  * file[/etc/httpd/mods-available/authn_file.load] action create (up to date)
+  * execute[a2enmod authn_file] action run (skipped due to not_if)
+Recipe: apache2::mod_authz_core\u001b[0m
+  * file[/etc/httpd/mods-available/authz_core.load] action create (up to date)
+  * execute[a2enmod authz_core] action run (skipped due to not_if)
+Recipe: apache2::mod_authz_groupfile\u001b[0m
+  * file[/etc/httpd/mods-available/authz_groupfile.load] action create (up to date)
+  * execute[a2enmod authz_groupfile] action run (skipped due to not_if)
+Recipe: apache2::mod_authz_host\u001b[0m
+  * file[/etc/httpd/mods-available/authz_host.load] action create (up to date)
+  * execute[a2enmod authz_host] action run (skipped due to not_if)
+Recipe: apache2::mod_authz_user\u001b[0m
+  * file[/etc/httpd/mods-available/authz_user.load] action create (up to date)
+  * execute[a2enmod authz_user] action run (skipped due to not_if)
+Recipe: apache2::mod_autoindex\u001b[0m
+  * template[/etc/httpd/mods-available/autoindex.conf] action create (up to date)
+  * file[/etc/httpd/mods-available/autoindex.load] action create (up to date)
+  * execute[a2enmod autoindex] action run (skipped due to not_if)
+Recipe: apache2::mod_deflate\u001b[0m
+  * template[/etc/httpd/mods-available/deflate.conf] action create (up to date)
+  * file[/etc/httpd/mods-available/deflate.load] action create (up to date)
+  * execute[a2enmod deflate] action run (skipped due to not_if)
+Recipe: apache2::mod_dir\u001b[0m
+  * template[/etc/httpd/mods-available/dir.conf] action create (up to date)
+  * file[/etc/httpd/mods-available/dir.load] action create (up to date)
+  * execute[a2enmod dir] action run (skipped due to not_if)
+Recipe: apache2::mod_env\u001b[0m
+  * file[/etc/httpd/mods-available/env.load] action create (up to date)
+  * execute[a2enmod env] action run (skipped due to not_if)
+Recipe: apache2::mod_mime\u001b[0m
+  * template[/etc/httpd/mods-available/mime.conf] action create (up to date)
+  * file[/etc/httpd/mods-available/mime.load] action create (up to date)
+  * execute[a2enmod mime] action run (skipped due to not_if)
+Recipe: apache2::mod_negotiation\u001b[0m
+  * template[/etc/httpd/mods-available/negotiation.conf] action create (up to date)
+  * file[/etc/httpd/mods-available/negotiation.load] action create (up to date)
+  * execute[a2enmod negotiation] action run (skipped due to not_if)
+Recipe: apache2::mod_setenvif\u001b[0m
+  * template[/etc/httpd/mods-available/setenvif.conf] action create (up to date)
+  * file[/etc/httpd/mods-available/setenvif.load] action create (up to date)
+  * execute[a2enmod setenvif] action run (skipped due to not_if)
+Recipe: apache2::mod_log_config\u001b[0m
+  * file[/etc/httpd/mods-available/log_config.load] action create (up to date)
+  * execute[a2enmod log_config] action run (skipped due to not_if)
+Recipe: apache2::mod_logio\u001b[0m
+  * file[/etc/httpd/mods-available/logio.load] action create (up to date)
+  * execute[a2enmod logio] action run (skipped due to not_if)
+Recipe: apache2::mod_unixd\u001b[0m
+  * file[/etc/httpd/mods-available/unixd.load] action create (up to date)
+  * execute[a2enmod unixd] action run (skipped due to not_if)
+Recipe: apache2::mod_systemd\u001b[0m
+  * file[/etc/httpd/mods-available/systemd.load] action create (up to date)
+  * execute[a2enmod systemd] action run (skipped due to not_if)
+Recipe: apache2::default\u001b[0m
+  * service[apache2] action enable (up to date)
+  * service[apache2] action start (up to date)
+Recipe: apache2::mod_wsgi\u001b[0m
+  * yum_package[mod_wsgi] action install (up to date)
+  * file[/etc/httpd/conf.d/wsgi.conf] action create (up to date)
+  * file[/etc/httpd/mods-available/wsgi.load] action create (up to date)
+  * execute[a2enmod wsgi] action run (skipped due to not_if)
+Recipe: openstack-identity::server-apache\u001b[0m
+  * directory[/var/www/html/keystone] action create (up to date)
+Recipe: apache2::mod_rewrite\u001b[0m
+  * file[/etc/httpd/mods-available/rewrite.load] action create (up to date)
+  * execute[a2enmod rewrite] action run (skipped due to not_if)
+Recipe: apache2::mod_headers\u001b[0m
+  * file[/etc/httpd/mods-available/headers.load] action create (up to date)
+  * execute[a2enmod headers] action run (skipped due to not_if)
+Recipe: openstack-identity::server-apache\u001b[0m
+  * template[/etc/httpd/sites-available/identity.conf] action create (up to date)
+  * execute[a2ensite identity.conf] action run (skipped due to not_if)
+  * execute[a2dissite keystone.conf] action run (skipped due to only_if)
+  * execute[Keystone apache restart] action run
+    \u001b[32m- execute uname\u001b[0m
+\u001b[0mRecipe: openstack-dashboard::apache2-server\u001b[0m
+  * execute[restore-selinux-context] action run (skipped due to only_if)
+Recipe: apache2::default\u001b[0m
+  * service[apache2] action restart
+    \u001b[32m- restart service service[apache2]\u001b[0m
+\u001b[0mRecipe: openstack-dashboard::horizon\u001b[0m
+  * file[/usr/share/openstack-dashboard/openstack_dashboard/local/.secret_key_store] action create (skipped due to only_if)
+Recipe: openstack-identity::server-apache\u001b[0m
+  * execute[restore-selinux-context] action nothing (skipped due to action :nothing)
+Recipe: openstack-identity::registration\u001b[0m
+  * ruby_block[wait for identity endpoint] action run
+    \u001b[32m- execute the ruby block wait for identity endpoint\u001b[0m
+\u001b[0m  * openstack_domain[identity] action create
+    \u001b[0m
+    ================================================================================\u001b[0m
+    \u001b[31mError executing action `create` on resource 'openstack_domain[identity]'\u001b[0m
+    ================================================================================\u001b[0m
+    
+\u001b[0m    Excon::Error::NotFound\u001b[0m
+    ----------------------\u001b[0m
+    Expected([200, 201]) <=> Actual(404 Not Found)
+\u001b[0m    excon.error.response
+\u001b[0m      :body          => \"{\\\"error\\\": {\\\"message\\\": \\\"(http://139.178.70.158:5000/v3/auth/tokens/auth/tokens): The resource could not be found.\\\", \\\"code\\\": 404, \\\"title\\\": \\\"Not Found\\\"}}\"
+\u001b[0m      :cookies       => [
+\u001b[0m      ]
+\u001b[0m      :headers       => {
+\u001b[0m        \"Content-Length\"         => \"150\"
+\u001b[0m        \"Content-Type\"           => \"application/json\"
+\u001b[0m        \"Date\"                   => \"Fri, 26 Apr 2019 19:53:23 GMT\"
+\u001b[0m        \"Server\"                 => \"Apache\"
+\u001b[0m        \"Vary\"                   => \"X-Auth-Token\"
+\u001b[0m        \"x-openstack-request-id\" => \"req-2aaae652-7d31-4e1a-ab46-3320d7f74c3c\"
+\u001b[0m      }
+\u001b[0m      :host          => \"139.178.70.158\"
+\u001b[0m      :local_address => \"139.178.70.158\"
+\u001b[0m      :local_port    => 58992
+\u001b[0m      :path          => \"/v3/auth/tokens/auth/tokens\"
+\u001b[0m      :port          => 5000
+\u001b[0m      :reason_phrase => \"Not Found\"
+\u001b[0m      :remote_ip     => \"139.178.70.158\"
+\u001b[0m      :status        => 404
+\u001b[0m      :status_line   => \"HTTP/1.1 404 Not Found\\r\
+\"
+\u001b[0m    
+\u001b[0m    Cookbook Trace:\u001b[0m
+    ---------------\u001b[0m
+    /root/.chef/local-mode-cache/cache/cookbooks/openstackclient/libraries/openstack_base.rb:21:in `connection'
+\u001b[0m    /root/.chef/local-mode-cache/cache/cookbooks/openstackclient/libraries/openstack_domain.rb:28:in `block in <class:OpenstackDomain>'\u001b[0m
+    
+\u001b[0m    Resource Declaration:\u001b[0m
+    ---------------------\u001b[0m
+    # In /root/.chef/local-mode-cache/cache/cookbooks/openstack-identity/recipes/registration.rb
+\u001b[0m    
+\u001b[0m     68: openstack_domain 'identity' do
+\u001b[0m     69:   connection_params connection_params
+\u001b[0m     70: end
+\u001b[0m     71: 
+\u001b[0m    
+\u001b[0m    Compiled Resource:\u001b[0m
+    ------------------\u001b[0m
+    # Declared in /root/.chef/local-mode-cache/cache/cookbooks/openstack-identity/recipes/registration.rb:68:in `from_file'
+\u001b[0m    
+\u001b[0m    openstack_domain(\"identity\") do
+\u001b[0m      action [:create]
+\u001b[0m      default_guard_interpreter :default
+\u001b[0m      declared_type :openstack_domain
+\u001b[0m      cookbook_name \"openstack-identity\"
+\u001b[0m      recipe_name \"registration\"
+\u001b[0m      connection_params {:openstack_auth_url=>\"http://139.178.70.158:5000/v3/auth/tokens\", :openstack_username=>\"admin\", :openstack_api_key=>\"mypass\", :openstack_project_name=>\"admin\", :openstack_domain_id=>\"default\"}
+\u001b[0m      domain_name \"identity\"
+\u001b[0m    end
+\u001b[0m    
+\u001b[0m    System Info:\u001b[0m
+    ------------\u001b[0m
+    chef_version=14.6.47
+\u001b[0m    platform=centos
+\u001b[0m    platform_version=7.6.1810
+\u001b[0m    ruby=ruby 2.5.3p105 (2018-10-18 revision 65156) [x86_64-linux]
+\u001b[0m    program_name=/usr/bin/chef-client
+\u001b[0m    executable=/opt/chefdk/bin/chef-client\u001b[0m
+    
+\u001b[0m\u001b[0m
+Running handlers:\u001b[0m
+[2019-04-26T19:53:24+00:00] ERROR: Running exception handlers
+Running handlers complete
+\u001b[0m[2019-04-26T19:53:24+00:00] ERROR: Exception handlers complete
+Chef Client failed. 16 resources updated in 34 seconds\u001b[0m
+[2019-04-26T19:53:24+00:00] FATAL: Stacktrace dumped to /root/.chef/local-mode-cache/cache/chef-stacktrace.out
+[2019-04-26T19:53:24+00:00] FATAL: Please provide the contents of the stacktrace.out file if you file a bug report
+[2019-04-26T19:53:24+00:00] FATAL: Excon::Error::NotFound: openstack_domain[identity] (openstack-identity::registration line 68) had an error: Excon::Error::NotFound: Expected([200, 201]) <=> Actual(404 Not Found)
+excon.error.response
+  :body          => \"{\\\"error\\\": {\\\"message\\\": \\\"(http://139.178.70.158:5000/v3/auth/tokens/auth/tokens): The resource could not be found.\\\", \\\"code\\\": 404, \\\"title\\\": \\\"Not Found\\\"}}\"
+  :cookies       => [
+  ]
+  :headers       => {
+    \"Content-Length\"         => \"150\"
+    \"Content-Type\"           => \"application/json\"
+    \"Date\"                   => \"Fri, 26 Apr 2019 19:53:23 GMT\"
+    \"Server\"                 => \"Apache\"
+    \"Vary\"                   => \"X-Auth-Token\"
+    \"x-openstack-request-id\" => \"req-2aaae652-7d31-4e1a-ab46-3320d7f74c3c\"
+  }
+  :host          => \"139.178.70.158\"
+  :local_address => \"139.178.70.158\"
+  :local_port    => 58992
+  :path          => \"/v3/auth/tokens/auth/tokens\"
+  :port          => 5000
+  :reason_phrase => \"Not Found\"
+  :remote_ip     => \"139.178.70.158\"
+  :status        => 404
+  :status_line   => \"HTTP/1.1 404 Not Found\\r\
+\"", "stdout_lines": ["[2019-04-26T19:52:50+00:00] WARN: No config file found or specified on command line, using command line options.", "Starting Chef Client, version 14.6.47\u001b[0m", "resolving cookbooks for run list: [\"build-essential\", \"openstack-common\", \"openstack-common::logging\", \"openstack-common::sysctl\", \"openstack-common::python\", \"openstack-common::client\", \"openstack-ops-database::server\", \"openstack-ops-database::openstack-db\", \"openstack-ops-messaging::rabbitmq-server\", \"openstack-identity::server-apache\", \"openstack-identity::registration\", \"openstack-identity::openrc\", \"openstack-image::api\", \"openstack-image::registry\", \"openstack-image::identity_registration\", \"openstack-network\", \"openstack-network::server\", \"openstack-network::ml2_core_plugin\", \"openstack-network::dhcp_agent\", \"openstack-network::metadata_agent\", \"openstack-compute::nova-setup\", \"openstack-compute::identity_registration\", \"openstack-compute::conductor\", \"openstack-compute::api-os-compute\", \"openstack-compute::api-metadata\", \"openstack-compute::placement_api\", \"openstack-compute::scheduler\", \"openstack-compute::vncproxy\", \"openstack-orchestration::engine\", \"openstack-orchestration::api\", \"openstack-orchestration::api-cfn\", \"openstack-orchestration::identity_registration\", \"openstack-image::image_upload\", \"openstack-dashboard::horizon\"]\u001b[0m", "Synchronizing Cookbooks:\u001b[0m", "  - build-essential (8.2.1)\u001b[0m", "  - openstack-common (18.0.0)\u001b[0m", "  - openstack-ops-database (18.0.0)\u001b[0m", "  - openstack-ops-messaging (18.0.0)\u001b[0m", "  - openstack-identity (18.0.0)\u001b[0m", "  - openstack-image (18.0.0)\u001b[0m", "  - openstack-network (18.0.0)\u001b[0m", "  - openstack-compute (18.0.0)\u001b[0m", "  - openstack-orchestration (18.0.0)\u001b[0m", "  - openstack-dashboard (18.0.0)\u001b[0m", "  - seven_zip (3.1.0)\u001b[0m", "  - mingw (2.1.0)\u001b[0m", "  - etcd (5.6.0)\u001b[0m", "  - mariadb (1.5.4)\u001b[0m", "  - memcached (4.1.0)\u001b[0m", "  - mysql (8.5.1)\u001b[0m", "  - poise-python (1.7.0)\u001b[0m", "  - selinux (2.1.1)\u001b[0m", "  - mysql2_chef_gem (2.1.0)\u001b[0m", "  - rabbitmq (5.8.0)\u001b[0m", "  - openstackclient (18.0.0)\u001b[0m", "  - apache2 (5.0.1)\u001b[0m", "  - windows (6.0.0)\u001b[0m", "  - docker (4.9.2)\u001b[0m", "  - apt (7.1.1)\u001b[0m", "  - selinux_policy (2.3.4)\u001b[0m", "  - yum (5.1.0)\u001b[0m", "  - yum-epel (3.3.0)\u001b[0m", "  - yum-scl (0.2.0)\u001b[0m", "  - runit (5.1.0)\u001b[0m", "  - poise (2.8.2)\u001b[0m", "  - poise-languages (2.1.2)\u001b[0m", "  - erlang (7.0.0)\u001b[0m", "  - dpkg_autostart (0.2.0)\u001b[0m", "  - yum-erlang_solutions (2.0.0)\u001b[0m", "  - logrotate (2.2.0)\u001b[0m", "  - inifile_chef_gem (0.1.0)\u001b[0m", "  - packagecloud (1.0.1)\u001b[0m", "  - poise-archive (1.5.0)\u001b[0m", "Installing Cookbook Gems:\u001b[0m", "Compiling Cookbooks...\u001b[0m", "Converging 391 resources\u001b[0m", "Recipe: build-essential::default\u001b[0m", "  * build_essential[install_packages] action install", "    * yum_package[autoconf, bison, flex, gcc, gcc-c++, gettext, kernel-devel, make, m4, ncurses-devel, patch] action install (up to date)", "     (up to date)", "Recipe: openstack-common::default\u001b[0m", "  * yum_repository[RDO-rocky] action add", "    * template[/etc/yum.repos.d/RDO-rocky.repo] action create (up to date)", "    * execute[yum clean metadata RDO-rocky] action nothing (skipped due to action :nothing)", "    * execute[yum-makecache-RDO-rocky] action nothing (skipped due to action :nothing)", "    * ruby_block[package-cache-reload-RDO-rocky] action nothing (skipped due to action :nothing)", "     (up to date)", "  * yum_repository[RDO-rocky-deps] action remove", "    * execute[yum clean all RDO-rocky-deps] action run (skipped due to only_if)", "    * file[/etc/yum.repos.d/RDO-rocky-deps.repo] action delete (up to date)", "    * ruby_block[package-cache-reload-RDO-rocky-deps] action nothing (skipped due to action :nothing)", "     (up to date)", "  * bash[yum_contentdir] action run (skipped due to not_if)", "  * yum_package[centos-release-qemu-ev] action upgrade (up to date)", "  * python_runtime[2] action install", "    * poise_languages_system[python] action install", "       (up to date)", "    * yum_package[python, python-devel] action nothing (skipped due to action :nothing)", "     (up to date)", "  * python_runtime_pip[2] action install (up to date)", "  * python_package[setuptools] action install (up to date)", "  * python_package[wheel] action install (up to date)", "  * python_package[virtualenv] action install (up to date)", "   (up to date)", "Recipe: openstack-common::logging\u001b[0m", "  * directory[/etc/openstack] action create (up to date)", "  * template[/etc/openstack/logging.conf] action create (up to date)", "Recipe: openstack-common::sysctl\u001b[0m", "  * directory[/etc/sysctl.d] action create (up to date)", "  * template[/etc/sysctl.d/60-openstack.conf] action create (up to date)", "  * execute[sysctl -p /etc/sysctl.d/60-openstack.conf] action nothing (skipped due to action :nothing)", "Recipe: openstack-common::python\u001b[0m", "  * python_runtime[3.5] action install", "    * poise_languages_scl[rh-python35] action install", "      * yum_package[centos-release-scl-rh] action upgrade (up to date)", "      * ruby_block[flush_yum_cache] action run", "        \u001b[32m- execute the ruby block flush_yum_cache\u001b[0m", "\u001b[0m      * yum_package[rh-python35] action install (up to date)", "      * yum_package[rh-python35-python-devel] action install (up to date)", "    ", "\u001b[0m    * python_runtime_pip[3.5] action install (up to date)", "    * python_package[setuptools] action install (up to date)", "    * python_package[wheel] action install (up to date)", "     (up to date)", "Recipe: openstack-common::client\u001b[0m", "  * yum_package[python-openstackclient] action upgrade (up to date)", "Recipe: yum::default\u001b[0m", "  * yum_globalconfig[/etc/yum.conf] action create", "    * template[/etc/yum.conf] action create (up to date)", "     (up to date)", "Recipe: mariadb::repository\u001b[0m", "  * yum_repository[mariadb-10.0] action create", "    * template[/etc/yum.repos.d/mariadb-10.0.repo] action create (up to date)", "    * execute[yum clean metadata mariadb-10.0] action nothing (skipped due to action :nothing)", "    * execute[yum-makecache-mariadb-10.0] action nothing (skipped due to action :nothing)", "    * ruby_block[package-cache-reload-mariadb-10.0] action nothing (skipped due to action :nothing)", "     (up to date)", "Recipe: yum-epel::default\u001b[0m", "  * yum_repository[epel] action create", "    * template[/etc/yum.repos.d/epel.repo] action create (up to date)", "    * execute[yum clean metadata epel] action nothing (skipped due to action :nothing)", "    * execute[yum-makecache-epel] action nothing (skipped due to action :nothing)", "    * ruby_block[package-cache-reload-epel] action nothing (skipped due to action :nothing)", "     (up to date)", "Recipe: mariadb::_redhat_client\u001b[0m", "  * yum_package[mysql-libs] action remove (skipped due to not_if)", "Recipe: mariadb::client\u001b[0m", "  * yum_package[MariaDB-client] action install (up to date)", "Recipe: mariadb::devel\u001b[0m", "  * yum_package[MariaDB-devel] action install (up to date)", "Recipe: openstack-ops-database::mariadb-client\u001b[0m", "  * mysql2_chef_gem_mysql2_chef_gem_mariadb[default] action install", "    \u001b[32m- evaluate block and run any associated actions\u001b[0m", "    \u001b[32m- evaluate block and run any associated actions\u001b[0m", "    * gem_package[mysql2] action install (up to date)", "  ", "\u001b[0m  * yum_package[MySQL-python] action install (up to date)", "Recipe: mariadb::_redhat_server_preinstall\u001b[0m", "  * yum_package[MariaDB-shared] action install (up to date)", "Recipe: mariadb::server\u001b[0m", "  * yum_package[MariaDB-server] action install (up to date)", "Recipe: mariadb::config\u001b[0m", "  * template[/root/.my.cnf] action create (skipped due to only_if)", "  * template[/etc/my.cnf] action create (up to date)", "  * directory[/etc/my.cnf.d] action create (skipped due to not_if)", "  * mariadb_configuration[20-innodb] action add", "    * template[/etc/my.cnf.d/20-innodb.cnf] action create (up to date)", "     (up to date)", "  * mariadb_configuration[30-replication] action add", "    * template[/etc/my.cnf.d/30-replication.cnf] action create (up to date)", "     (up to date)", "Recipe: mariadb::server\u001b[0m", "  * directory[/var/log/mysql] action create (up to date)", "  * execute[mariadb-service-restart-needed] action run (skipped due to only_if)", "  * service[mysql] action start (up to date)", "  * service[mysql] action enable (up to date)", "  * ruby_block[restart_mysql] action nothing (skipped due to action :nothing)", "Recipe: mariadb::_redhat_server_postinstall\u001b[0m", "  * execute[change first install root password] action run (skipped due to not_if)", "Recipe: mariadb::_mariadb_postinstall\u001b[0m", "  * file[/etc/mysql_root_change] action create (up to date)", "  * execute[install-grants] action nothing (skipped due to action :nothing)", "  * template[/etc/mariadb_grants] action create (up to date)", "Recipe: openstack-ops-database::mariadb-server\u001b[0m", "  * template[/etc/my.cnf.d/openstack.cnf] action create (up to date)", "Recipe: openstack-ops-database::openstack-db\u001b[0m", "  * log[No databag item containing the database password for aodh was found, so no database was created] action write", "  ", "\u001b[0m  * openstack_common_database[bare_metal] action create", "    * database[create database ironic] action create (up to date)", "    * database_user[create database user ironic] action create (up to date)", "    * database_user[grant database user ironic] action grant (up to date)", "     (up to date)", "  * openstack_common_database[block_storage] action create", "    * database[create database cinder] action create (up to date)", "    * database_user[create database user cinder] action create (up to date)", "    * database_user[grant database user cinder] action grant (up to date)", "     (up to date)", "  * openstack_common_database[compute] action create", "    * database[create database nova] action create (up to date)", "    * database_user[create database user nova] action create (up to date)", "    * database_user[grant database user nova] action grant (up to date)", "     (up to date)", "  * openstack_common_database[compute_api] action create", "    * database[create database nova_api] action create (up to date)", "    * database_user[create database user nova_api] action create (up to date)", "    * database_user[grant database user nova_api] action grant (up to date)", "     (up to date)", "  * openstack_common_database[compute_cell0] action create", "    * database[create database nova_cell0] action create (up to date)", "    * database_user[create database user nova_cell0] action create (up to date)", "    * database_user[grant database user nova_cell0] action grant (up to date)", "     (up to date)", "  * openstack_common_database[dashboard] action create", "    * database[create database horizon] action create (up to date)", "    * database_user[create database user horizon] action create (up to date)", "    * database_user[grant database user horizon] action grant (up to date)", "     (up to date)", "  * log[No databag item containing the database password for trove was found, so no database was created] action write", "  ", "\u001b[0m  * openstack_common_database[dns] action create", "    * database[create database designate] action create (up to date)", "    * database_user[create database user designate] action create (up to date)", "    * database_user[grant database user designate] action grant (up to date)", "     (up to date)", "  * openstack_common_database[identity] action create", "    * database[create database keystone] action create (up to date)", "    * database_user[create database user keystone] action create (up to date)", "    * database_user[grant database user keystone] action grant (up to date)", "     (up to date)", "  * openstack_common_database[image] action create", "    * database[create database glance] action create (up to date)", "    * database_user[create database user glance] action create (up to date)", "    * database_user[grant database user glance] action grant (up to date)", "     (up to date)", "  * openstack_common_database[network] action create", "    * database[create database neutron] action create (up to date)", "    * database_user[create database user neutron] action create (up to date)", "    * database_user[grant database user neutron] action grant (up to date)", "     (up to date)", "  * log[No databag item containing the database password for swift was found, so no database was created] action write", "  ", "\u001b[0m  * openstack_common_database[orchestration] action create", "    * database[create database heat] action create (up to date)", "    * database_user[create database user heat] action create (up to date)", "    * database_user[grant database user heat] action grant (up to date)", "     (up to date)", "  * openstack_common_database[telemetry] action create", "    * database[create database ceilometer] action create (up to date)", "    * database_user[create database user ceilometer] action create (up to date)", "    * database_user[grant database user ceilometer] action grant (up to date)", "     (up to date)", "  * openstack_common_database[telemetry_metric] action create", "    * database[create database gnocchi] action create (up to date)", "    * database_user[create database user gnocchi] action create (up to date)", "    * database_user[grant database user gnocchi] action grant (up to date)", "     (up to date)", "  * log[No databag item containing the database password for murano was found, so no database was created] action write", "  ", "\u001b[0mRecipe: erlang::package\u001b[0m", "  * yum_package[erlang] action install (up to date)", "Recipe: rabbitmq::default\u001b[0m", "  * directory[/etc/rabbitmq] action create (up to date)", "  * yum_package[logrotate] action install (up to date)", "  * yum_package[socat] action install (up to date)", "  * remote_file[/root/.chef/local-mode-cache/cache/rabbitmq-server-3.7.14-1.el7.noarch.rpm] action create_if_missing (up to date)", "  * rpm_package[/root/.chef/local-mode-cache/cache/rabbitmq-server-3.7.14-1.el7.noarch.rpm] action install (up to date)", "  * directory[/var/lib/rabbitmq/mnesia] action create (up to date)", "  * template[/etc/rabbitmq/rabbitmq-env.conf] action create (up to date)", "  * template[/etc/rabbitmq/rabbitmq.config] action create (up to date)", "  * template[/etc/default/rabbitmq-server] action create (up to date)", "  * service[rabbitmq-server] action enable (up to date)", "  * service[rabbitmq-server] action start (up to date)", "  * ohai[reload_packages] action reload", "    \u001b[32m- re-run ohai and merge results into node attributes\u001b[0m", "\u001b[0mRecipe: rabbitmq::management_ui\u001b[0m", "  * rabbitmq_plugin[rabbitmq_management] action enable (up to date)", "Recipe: openstack-ops-messaging::rabbitmq-server\u001b[0m", "  * rabbitmq_user[add openstack rabbit user] action add (up to date)", "  * rabbitmq_user[change openstack rabbit user password] action change_password", "    * execute[rabbitmqctl -q change_password admin] action run", "      \u001b[32m- execute sensitive resource\u001b[0m", "\u001b[0m  ", "\u001b[0m  * rabbitmq_vhost[add openstack rabbit vhost] action add (up to date)", "  * rabbitmq_user[set openstack user permissions] action set_permissions (up to date)", "  * rabbitmq_user[set rabbit administrator tag] action set_tags (up to date)", "Recipe: openstack-identity::server-apache\u001b[0m", "  * execute[set-selinux-permissive] action run (skipped due to only_if)", "  * yum_package[identity cookbook package MySQL-python] action upgrade (up to date)", "  * yum_package[identity cookbook package python-memcached] action upgrade (up to date)", "  * yum_package[identity cookbook package openstack-keystone] action upgrade (up to date)", "  * yum_package[identity cookbook package openstack-selinux] action upgrade (up to date)", "  * service[keystone] action stop (up to date)", "  * service[keystone] action disable (up to date)", "  * directory[/etc/keystone] action create (up to date)", "  * directory[/etc/keystone/domains] action create (skipped due to only_if)", "  * file[/var/lib/keystone/keystone.db] action delete (up to date)", "Recipe: openstack-identity::_credential_tokens\u001b[0m", "  * directory[/etc/keystone/credential-tokens] action create (up to date)", "  * file[/etc/keystone/credential-tokens/0] action create (up to date)", "  * file[/etc/keystone/credential-tokens/1] action create (up to date)", "Recipe: openstack-identity::_fernet_tokens\u001b[0m", "  * directory[/etc/keystone/fernet-tokens] action create (up to date)", "  * file[/etc/keystone/fernet-tokens/0] action create (up to date)", "  * file[/etc/keystone/fernet-tokens/1] action create (up to date)", "Recipe: openstack-identity::server-apache\u001b[0m", "  * template[/etc/keystone/keystone-paste.ini] action create (up to date)", "  * template[/etc/keystone/keystone.conf] action create (up to date)", "  * ruby_block[delete all attributes in node['openstack']['identity']['conf_secrets']] action run", "    \u001b[32m- execute the ruby block delete all attributes in node['openstack']['identity']['conf_secrets']\u001b[0m", "\u001b[0m  * execute[keystone-manage db_sync] action run", "    \u001b[32m- execute keystone-manage db_sync\u001b[0m", "\u001b[0m  * execute[bootstrap_keystone] action run", "    \u001b[32m- execute keystone-manage bootstrap \\", "\u001b[0m    \u001b[32m          --bootstrap-password mypass \\", "\u001b[0m    \u001b[32m          --bootstrap-username admin \\", "\u001b[0m    \u001b[32m          --bootstrap-project-name admin \\", "\u001b[0m    \u001b[32m          --bootstrap-role-name admin \\", "\u001b[0m    \u001b[32m          --bootstrap-service-name keystone \\", "\u001b[0m    \u001b[32m          --bootstrap-region-id RegionOne \\", "\u001b[0m    \u001b[32m          --bootstrap-admin-url http://139.178.70.158:5000/v3 \\", "\u001b[0m    \u001b[32m          --bootstrap-public-url http://139.178.70.158:5000/v3 \\", "\u001b[0m    \u001b[32m          --bootstrap-internal-url http://139.178.70.158:5000/v3\u001b[0m", "\u001b[0mRecipe: apache2::default\u001b[0m", "  * yum_package[apache2] action install (up to date)", "  * directory[/etc/httpd/sites-available] action create (up to date)", "  * directory[/etc/httpd/sites-enabled] action create (up to date)", "  * directory[/etc/httpd/mods-available] action create (up to date)", "  * directory[/etc/httpd/mods-enabled] action create (up to date)", "  * directory[/etc/httpd/conf-available] action create (up to date)", "  * directory[/etc/httpd/conf-enabled] action create (up to date)", "  * link[/etc/httpd/sites-enabled/default] action delete (up to date)", "  * file[/etc/httpd/sites-available/default] action delete (up to date)", "  * link[/etc/httpd/sites-enabled/default.conf] action delete (up to date)", "  * file[/etc/httpd/sites-available/default.conf] action delete (up to date)", "  * link[/etc/httpd/sites-enabled/000-default] action delete (up to date)", "  * file[/etc/httpd/sites-available/000-default] action delete (up to date)", "  * link[/etc/httpd/sites-enabled/000-default.conf] action delete (up to date)", "  * file[/etc/httpd/sites-available/000-default.conf] action delete (up to date)", "  * directory[/var/log/httpd] action create (up to date)", "  * yum_package[perl] action install (up to date)", "  * link[/usr/sbin/a2ensite] action delete (skipped due to only_if)", "  * template[/usr/sbin/a2ensite] action create (up to date)", "  * link[/usr/sbin/a2dissite] action delete (skipped due to only_if)", "  * template[/usr/sbin/a2dissite] action create (up to date)", "  * link[/usr/sbin/a2enmod] action delete (skipped due to only_if)", "  * template[/usr/sbin/a2enmod] action create (up to date)", "  * link[/usr/sbin/a2dismod] action delete (skipped due to only_if)", "  * template[/usr/sbin/a2dismod] action create (up to date)", "  * link[/usr/sbin/a2enconf] action delete (skipped due to only_if)", "  * template[/usr/sbin/a2enconf] action create (up to date)", "  * link[/usr/sbin/a2disconf] action delete (skipped due to only_if)", "  * template[/usr/sbin/a2disconf] action create (up to date)", "  * cookbook_file[/usr/local/bin/apache2_module_conf_generate.pl] action create (up to date)", "  * execute[generate-module-list] action nothing (skipped due to action :nothing)", "  * directory[/etc/httpd/ssl] action create (up to date)", "  * directory[/var/cache/httpd] action create (up to date)", "  * directory[/var/run/httpd] action create (up to date)", "  * template[/etc/sysconfig/httpd] action create (up to date)", "  * template[/etc/httpd/envvars] action create (skipped due to only_if)", "  * template[apache2.conf] action create (up to date)", "  * file[/etc/httpd/conf-available/security] action delete (up to date)", "  * template[/etc/httpd/conf-available/security.conf] action create (up to date)", "  * execute[a2enconf security.conf] action run (skipped due to not_if)", "  * file[/etc/httpd/conf-available/charset] action delete (up to date)", "  * template[/etc/httpd/conf-available/charset.conf] action create (up to date)", "  * execute[a2enconf charset.conf] action run (skipped due to not_if)", "  * file[/etc/httpd/ports] action delete (up to date)", "  * template[/etc/httpd/ports.conf] action create (up to date)", "Recipe: apache2::mpm_prefork\u001b[0m", "  * file[/etc/httpd/mods-available/mpm_event.load] action create (up to date)", "  * execute[a2dismod mpm_event] action run (skipped due to only_if)", "  * file[/etc/httpd/mods-available/mpm_worker.load] action create (up to date)", "  * execute[a2dismod mpm_worker] action run (skipped due to only_if)", "  * template[/etc/httpd/mods-available/mpm_prefork.conf] action create (up to date)", "  * file[/etc/httpd/mods-available/mpm_prefork.load] action create (up to date)", "  * execute[a2enmod mpm_prefork] action run (skipped due to not_if)", "Recipe: apache2::mod_status\u001b[0m", "  * template[/etc/httpd/mods-available/status.conf] action create (up to date)", "  * file[/etc/httpd/mods-available/status.load] action create (up to date)", "  * execute[a2enmod status] action run (skipped due to not_if)", "Recipe: apache2::mod_alias\u001b[0m", "  * template[/etc/httpd/mods-available/alias.conf] action create (up to date)", "  * file[/etc/httpd/mods-available/alias.load] action create (up to date)", "  * execute[a2enmod alias] action run (skipped due to not_if)", "Recipe: apache2::mod_auth_basic\u001b[0m", "  * file[/etc/httpd/mods-available/auth_basic.load] action create (up to date)", "  * execute[a2enmod auth_basic] action run (skipped due to not_if)", "Recipe: apache2::mod_authn_core\u001b[0m", "  * file[/etc/httpd/mods-available/authn_core.load] action create (up to date)", "  * execute[a2enmod authn_core] action run (skipped due to not_if)", "Recipe: apache2::mod_authn_file\u001b[0m", "  * file[/etc/httpd/mods-available/authn_file.load] action create (up to date)", "  * execute[a2enmod authn_file] action run (skipped due to not_if)", "Recipe: apache2::mod_authz_core\u001b[0m", "  * file[/etc/httpd/mods-available/authz_core.load] action create (up to date)", "  * execute[a2enmod authz_core] action run (skipped due to not_if)", "Recipe: apache2::mod_authz_groupfile\u001b[0m", "  * file[/etc/httpd/mods-available/authz_groupfile.load] action create (up to date)", "  * execute[a2enmod authz_groupfile] action run (skipped due to not_if)", "Recipe: apache2::mod_authz_host\u001b[0m", "  * file[/etc/httpd/mods-available/authz_host.load] action create (up to date)", "  * execute[a2enmod authz_host] action run (skipped due to not_if)", "Recipe: apache2::mod_authz_user\u001b[0m", "  * file[/etc/httpd/mods-available/authz_user.load] action create (up to date)", "  * execute[a2enmod authz_user] action run (skipped due to not_if)", "Recipe: apache2::mod_autoindex\u001b[0m", "  * template[/etc/httpd/mods-available/autoindex.conf] action create (up to date)", "  * file[/etc/httpd/mods-available/autoindex.load] action create (up to date)", "  * execute[a2enmod autoindex] action run (skipped due to not_if)", "Recipe: apache2::mod_deflate\u001b[0m", "  * template[/etc/httpd/mods-available/deflate.conf] action create (up to date)", "  * file[/etc/httpd/mods-available/deflate.load] action create (up to date)", "  * execute[a2enmod deflate] action run (skipped due to not_if)", "Recipe: apache2::mod_dir\u001b[0m", "  * template[/etc/httpd/mods-available/dir.conf] action create (up to date)", "  * file[/etc/httpd/mods-available/dir.load] action create (up to date)", "  * execute[a2enmod dir] action run (skipped due to not_if)", "Recipe: apache2::mod_env\u001b[0m", "  * file[/etc/httpd/mods-available/env.load] action create (up to date)", "  * execute[a2enmod env] action run (skipped due to not_if)", "Recipe: apache2::mod_mime\u001b[0m", "  * template[/etc/httpd/mods-available/mime.conf] action create (up to date)", "  * file[/etc/httpd/mods-available/mime.load] action create (up to date)", "  * execute[a2enmod mime] action run (skipped due to not_if)", "Recipe: apache2::mod_negotiation\u001b[0m", "  * template[/etc/httpd/mods-available/negotiation.conf] action create (up to date)", "  * file[/etc/httpd/mods-available/negotiation.load] action create (up to date)", "  * execute[a2enmod negotiation] action run (skipped due to not_if)", "Recipe: apache2::mod_setenvif\u001b[0m", "  * template[/etc/httpd/mods-available/setenvif.conf] action create (up to date)", "  * file[/etc/httpd/mods-available/setenvif.load] action create (up to date)", "  * execute[a2enmod setenvif] action run (skipped due to not_if)", "Recipe: apache2::mod_log_config\u001b[0m", "  * file[/etc/httpd/mods-available/log_config.load] action create (up to date)", "  * execute[a2enmod log_config] action run (skipped due to not_if)", "Recipe: apache2::mod_logio\u001b[0m", "  * file[/etc/httpd/mods-available/logio.load] action create (up to date)", "  * execute[a2enmod logio] action run (skipped due to not_if)", "Recipe: apache2::mod_unixd\u001b[0m", "  * file[/etc/httpd/mods-available/unixd.load] action create (up to date)", "  * execute[a2enmod unixd] action run (skipped due to not_if)", "Recipe: apache2::mod_systemd\u001b[0m", "  * file[/etc/httpd/mods-available/systemd.load] action create (up to date)", "  * execute[a2enmod systemd] action run (skipped due to not_if)", "Recipe: apache2::default\u001b[0m", "  * service[apache2] action enable (up to date)", "  * service[apache2] action start (up to date)", "Recipe: apache2::mod_wsgi\u001b[0m", "  * yum_package[mod_wsgi] action install (up to date)", "  * file[/etc/httpd/conf.d/wsgi.conf] action create (up to date)", "  * file[/etc/httpd/mods-available/wsgi.load] action create (up to date)", "  * execute[a2enmod wsgi] action run (skipped due to not_if)", "Recipe: openstack-identity::server-apache\u001b[0m", "  * directory[/var/www/html/keystone] action create (up to date)", "Recipe: apache2::mod_rewrite\u001b[0m", "  * file[/etc/httpd/mods-available/rewrite.load] action create (up to date)", "  * execute[a2enmod rewrite] action run (skipped due to not_if)", "Recipe: apache2::mod_headers\u001b[0m", "  * file[/etc/httpd/mods-available/headers.load] action create (up to date)", "  * execute[a2enmod headers] action run (skipped due to not_if)", "Recipe: openstack-identity::server-apache\u001b[0m", "  * template[/etc/httpd/sites-available/identity.conf] action create (up to date)", "  * execute[a2ensite identity.conf] action run (skipped due to not_if)", "  * execute[a2dissite keystone.conf] action run (skipped due to only_if)", "  * execute[Keystone apache restart] action run", "    \u001b[32m- execute uname\u001b[0m", "\u001b[0mRecipe: openstack-dashboard::apache2-server\u001b[0m", "  * execute[restore-selinux-context] action run (skipped due to only_if)", "Recipe: apache2::default\u001b[0m", "  * service[apache2] action restart", "    \u001b[32m- restart service service[apache2]\u001b[0m", "\u001b[0mRecipe: openstack-dashboard::horizon\u001b[0m", "  * file[/usr/share/openstack-dashboard/openstack_dashboard/local/.secret_key_store] action create (skipped due to only_if)", "Recipe: openstack-identity::server-apache\u001b[0m", "  * execute[restore-selinux-context] action nothing (skipped due to action :nothing)", "Recipe: openstack-identity::registration\u001b[0m", "  * ruby_block[wait for identity endpoint] action run", "    \u001b[32m- execute the ruby block wait for identity endpoint\u001b[0m", "\u001b[0m  * openstack_domain[identity] action create", "    \u001b[0m", "    ================================================================================\u001b[0m", "    \u001b[31mError executing action `create` on resource 'openstack_domain[identity]'\u001b[0m", "    ================================================================================\u001b[0m", "    ", "\u001b[0m    Excon::Error::NotFound\u001b[0m", "    ----------------------\u001b[0m", "    Expected([200, 201]) <=> Actual(404 Not Found)", "\u001b[0m    excon.error.response", "\u001b[0m      :body          => \"{\\\"error\\\": {\\\"message\\\": \\\"(http://139.178.70.158:5000/v3/auth/tokens/auth/tokens): The resource could not be found.\\\", \\\"code\\\": 404, \\\"title\\\": \\\"Not Found\\\"}}\"", "\u001b[0m      :cookies       => [", "\u001b[0m      ]", "\u001b[0m      :headers       => {", "\u001b[0m        \"Content-Length\"         => \"150\"", "\u001b[0m        \"Content-Type\"           => \"application/json\"", "\u001b[0m        \"Date\"                   => \"Fri, 26 Apr 2019 19:53:23 GMT\"", "\u001b[0m        \"Server\"                 => \"Apache\"", "\u001b[0m        \"Vary\"                   => \"X-Auth-Token\"", "\u001b[0m        \"x-openstack-request-id\" => \"req-2aaae652-7d31-4e1a-ab46-3320d7f74c3c\"", "\u001b[0m      }", "\u001b[0m      :host          => \"139.178.70.158\"", "\u001b[0m      :local_address => \"139.178.70.158\"", "\u001b[0m      :local_port    => 58992", "\u001b[0m      :path          => \"/v3/auth/tokens/auth/tokens\"", "\u001b[0m      :port          => 5000", "\u001b[0m      :reason_phrase => \"Not Found\"", "\u001b[0m      :remote_ip     => \"139.178.70.158\"", "\u001b[0m      :status        => 404", "\u001b[0m      :status_line   => \"HTTP/1.1 404 Not Found\\r\
+\"", "\u001b[0m    ", "\u001b[0m    Cookbook Trace:\u001b[0m", "    ---------------\u001b[0m", "    /root/.chef/local-mode-cache/cache/cookbooks/openstackclient/libraries/openstack_base.rb:21:in `connection'", "\u001b[0m    /root/.chef/local-mode-cache/cache/cookbooks/openstackclient/libraries/openstack_domain.rb:28:in `block in <class:OpenstackDomain>'\u001b[0m", "    ", "\u001b[0m    Resource Declaration:\u001b[0m", "    ---------------------\u001b[0m", "    # In /root/.chef/local-mode-cache/cache/cookbooks/openstack-identity/recipes/registration.rb", "\u001b[0m    ", "\u001b[0m     68: openstack_domain 'identity' do", "\u001b[0m     69:   connection_params connection_params", "\u001b[0m     70: end", "\u001b[0m     71: ", "\u001b[0m    ", "\u001b[0m    Compiled Resource:\u001b[0m", "    ------------------\u001b[0m", "    # Declared in /root/.chef/local-mode-cache/cache/cookbooks/openstack-identity/recipes/registration.rb:68:in `from_file'", "\u001b[0m    ", "\u001b[0m    openstack_domain(\"identity\") do", "\u001b[0m      action [:create]", "\u001b[0m      default_guard_interpreter :default", "\u001b[0m      declared_type :openstack_domain", "\u001b[0m      cookbook_name \"openstack-identity\"", "\u001b[0m      recipe_name \"registration\"", "\u001b[0m      connection_params {:openstack_auth_url=>\"http://139.178.70.158:5000/v3/auth/tokens\", :openstack_username=>\"admin\", :openstack_api_key=>\"mypass\", :openstack_project_name=>\"admin\", :openstack_domain_id=>\"default\"}", "\u001b[0m      domain_name \"identity\"", "\u001b[0m    end", "\u001b[0m    ", "\u001b[0m    System Info:\u001b[0m", "    ------------\u001b[0m", "    chef_version=14.6.47", "\u001b[0m    platform=centos", "\u001b[0m    platform_version=7.6.1810", "\u001b[0m    ruby=ruby 2.5.3p105 (2018-10-18 revision 65156) [x86_64-linux]", "\u001b[0m    program_name=/usr/bin/chef-client", "\u001b[0m    executable=/opt/chefdk/bin/chef-client\u001b[0m", "    ", "\u001b[0m\u001b[0m", "Running handlers:\u001b[0m", "[2019-04-26T19:53:24+00:00] ERROR: Running exception handlers", "Running handlers complete", "\u001b[0m[2019-04-26T19:53:24+00:00] ERROR: Exception handlers complete", "Chef Client failed. 16 resources updated in 34 seconds\u001b[0m", "[2019-04-26T19:53:24+00:00] FATAL: Stacktrace dumped to /root/.chef/local-mode-cache/cache/chef-stacktrace.out", "[2019-04-26T19:53:24+00:00] FATAL: Please provide the contents of the stacktrace.out file if you file a bug report", "[2019-04-26T19:53:24+00:00] FATAL: Excon::Error::NotFound: openstack_domain[identity] (openstack-identity::registration line 68) had an error: Excon::Error::NotFound: Expected([200, 201]) <=> Actual(404 Not Found)", "excon.error.response", "  :body          => \"{\\\"error\\\": {\\\"message\\\": \\\"(http://139.178.70.158:5000/v3/auth/tokens/auth/tokens): The resource could not be found.\\\", \\\"code\\\": 404, \\\"title\\\": \\\"Not Found\\\"}}\"", "  :cookies       => [", "  ]", "  :headers       => {", "    \"Content-Length\"         => \"150\"", "    \"Content-Type\"           => \"application/json\"", "    \"Date\"                   => \"Fri, 26 Apr 2019 19:53:23 GMT\"", "    \"Server\"                 => \"Apache\"", "    \"Vary\"                   => \"X-Auth-Token\"", "    \"x-openstack-request-id\" => \"req-2aaae652-7d31-4e1a-ab46-3320d7f74c3c\"", "  }", "  :host          => \"139.178.70.158\"", "  :local_address => \"139.178.70.158\"", "  :local_port    => 58992", "  :path          => \"/v3/auth/tokens/auth/tokens\"", "  :port          => 5000", "  :reason_phrase => \"Not Found\"", "  :remote_ip     => \"139.178.70.158\"", "  :status        => 404", "  :status_line   => \"HTTP/1.1 404 Not Found\\r\
+\""]}

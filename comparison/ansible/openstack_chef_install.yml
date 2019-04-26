@@ -2,11 +2,11 @@
 - hosts: all
   vars:
     vpp_network: true
-    vpp_ver: 1807
-    vpp_branch: '18.07'
-    vpp_commit: stable/1807
+    vpp_ver: "{{ '1901' if ansible_os_family == 'RedHat' else '1807' }}"
+    vpp_branch: "{{ '19.01' if ansible_os_family == 'RedHat' else '18.07' }}"
+    vpp_commit: "stable/{{vpp_ver}}"
     create_vlans: true
-    create_masquerade: true
+    create_masquerade: true # TODO: <- does nothing
 
   pre_tasks:
   - setup:

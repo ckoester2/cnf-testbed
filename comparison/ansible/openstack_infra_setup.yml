@@ -9,6 +9,11 @@
       update_cache: yes
     when: ansible_os_family == "Debian"
 
+  - name: Install git
+    apt:
+      name: git
+    when: ansible_os_family == "Debian"
+
   - name: Install EPEL Package
     yum:
       name: epel-release
@@ -19,6 +24,11 @@
       name: '*'
       state: latest
       update_cache: yes
+    when: ansible_os_family == "RedHat"
+  
+  - name: Install git
+    yum:
+      name: git
     when: ansible_os_family == "RedHat"
 
   - name: Install Vlan Package
@@ -38,9 +48,9 @@
 
   vars:
     #mlnx_ver: 4.5-1.0.1.0
-    arch: ubuntu18.04-x86_64
-    mlnx_ver: 4.4-2.0.7.0
-    # arch: ubuntu16.04-x86_64
+    # arch: ubuntu18.04-x86_64 
+    arch: "{{ 'ubuntu18.04-x86_64' if ansible_os_family == 'Debian' else 'rhel7.6-x86_64' }}" # mlx src build os and version
+    mlnx_ver: "{{ '4.4-2.0.7.0' if ansible_os_family == 'Debian' else '4.5-1.0.1.0' }}" # mlx version for src build
     config_network_bonds: true
     config_network_bridges: false
     config_network_interfaces: true
@@ -110,6 +120,6 @@
       when: ansible_os_family == 'Debian'
     - role: packet_vlan_enable
       when: ansible_bond0.slaves[1] is defined
+    - role: grub_openstack
     - role: mellanox_src_install
       when: mellanox.rc == 0 and not ansible_distribution_release == 'xenial'
-    - role: grub_openstack

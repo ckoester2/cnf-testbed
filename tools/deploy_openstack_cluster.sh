@@ -4,6 +4,7 @@ parentdir="$(dirname "$dir")"
 
 MASTER_NAME=${MASTER_NAME:-openstack}
 NODE_NAME=${NODE_NAME:-openstack}
+DEPLOY_ENV=${DEPLOY_ENV:-test}
 MASTER_COUNT=${MASTER_COUNT:-1}
 NODE_COUNT=${NODE_COUNT:-2}
 MASTER_PLAN=${MASTER_PLAN:-m2.xlarge.x86}
