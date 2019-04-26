@@ -1,10 +1,12 @@
 ---
 - hosts: all
+  vars_files:
+  - vars/{{ ansible_os_family }}_os_install.yml
   vars:
     vpp_network: true
-    vpp_ver: 1807
-    vpp_branch: '18.07'
-    vpp_commit: stable/1807
+    # vpp_ver: 1807
+    # vpp_branch: '18.07' # see: os dependant var files
+    vpp_commit: "stable/{{vpp_ver}}"
     create_vlans: true
     create_masquerade: true
 
@@ -24,6 +26,9 @@
     set_fact:
       vpp_interface: TwentyFiveGigabitEthernet5e/0/1
       vpp_src: true
+      vpp_ver: 1807
+      vpp_branch: '18.07' # overrides os dependant var files
+      vpp_commit: "stable/{{vpp_ver}}"
     when: mellanox.rc == 0
 
   - name: set vpp interface name for Intel

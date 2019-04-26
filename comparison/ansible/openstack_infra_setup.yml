@@ -36,11 +36,11 @@
     register: mellanox
     ignore_errors: true
 
+  vars_files:
+  - vars/{{ ansible_os_family }}_os_infra.yml
   vars:
-    #mlnx_ver: 4.5-1.0.1.0
-    arch: ubuntu18.04-x86_64
-    mlnx_ver: 4.4-2.0.7.0
-    # arch: ubuntu16.04-x86_64
+    # mlnx_ver: 4.5-1.0.1.0
+    # arch: ubuntu16.04-x86_64 # See: os dependant var files
     config_network_bonds: true
     config_network_bridges: false
     config_network_interfaces: true

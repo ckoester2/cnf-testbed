@@ -1,0 +1,3 @@
+---
+vpp_srv_pkgs: "{{ ['vpp-lib', 'vpp-plugins'] if vpp_ver < 1904 else ['libvppinfra', 'vpp-plugin-core', 'vpp-plugin-dpdk'] }}"
+vpp_api_pkgs: "{{ ['vpp-api-python','vpp-api-lua','vpp-api-java'] if vpp_ver < 1904 else ['vpp-api-python','vpp-api-java'] }}"
