@@ -44,6 +44,21 @@
     chdir: /root/.berkshelf/
     creates: /root/openstack-chef/cookbooks/
 
+# TODO: file a bug for this
+- name: Find identity cookbook
+  find:
+    paths: /root/openstack-chef/cookbooks/
+    recurse: yes
+    patterns: "registration.rb"
+  register: identity_registration_rb
+
+- name: Remove duplicate path from auth_url
+  lineinfile:
+    path: "{{ item.path }}"
+    regexp: 'openstack_auth_url:\s+"#{auth_url}\/auth\/tokens",'
+    line: 'openstack_auth_url:     "#{auth_url}",'
+  with_items: "{{identity_registration_rb['files']}}"
+
 - name: find openstack-common python.rb
   find:
     paths: /root/openstack-chef/cookbooks/
