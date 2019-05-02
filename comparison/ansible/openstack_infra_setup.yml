@@ -14,9 +14,15 @@
       name: git
     when: ansible_os_family == "Debian"
 
-  - name: Install EPEL Package
+  # - name: Install EPEL Package # disabled due to missing: ninja-build, ninja-build
+  #   yum:
+  #     name: epel-release
+  #   when: ansible_os_family == "RedHat"
+  
+  - name: Install latest EPEL Package
     yum:
-      name: epel-release
+      name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+      state: present
     when: ansible_os_family == "RedHat"
 
   - name: Yum update

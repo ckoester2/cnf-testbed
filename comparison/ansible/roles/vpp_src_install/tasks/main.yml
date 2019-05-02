@@ -41,8 +41,8 @@
     command: make install-dep
     echo: yes
     responses:
-    - "Do you want to continue.*": "Y" # Debian
-    - "Is this ok*": "y" # Centos
+      "Do you want to continue.*": "Y" # Debian
+      "Is this ok*": "y" # Centos
     timeout: 300
 
 #- name: get NASM code from launchpad

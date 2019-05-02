@@ -9,9 +9,14 @@
     update_cache: yes
   when: ansible_os_family == 'Debian'
 
+# - name: get chef package
+#   yum:
+#     name: https://packages.chef.io/files/stable/chefdk/3.4.38/el/7/chefdk-3.4.38-1.el7.x86_64.rpm
+#   when: ansible_os_family == 'RedHat'
+
 - name: get chef package
   yum:
-    name: https://packages.chef.io/files/stable/chefdk/3.4.38/el/7/chefdk-3.4.38-1.el7.x86_64.rpm
+    name: https://packages.chef.io/files/stable/chefdk/3.2.30/el/7/chefdk-3.2.30-1.el7.x86_64.rpm
   when: ansible_os_family == 'RedHat'
 
 #- name: download chef package Debian
@@ -45,19 +50,19 @@
     creates: /root/openstack-chef/cookbooks/
 
 # TODO: file a bug for this
-- name: Find identity cookbook
-  find:
-    paths: /root/openstack-chef/cookbooks/
-    recurse: yes
-    patterns: "registration.rb"
-  register: identity_registration_rb
+# - name: Find identity registration recipe files from cookbooks
+#   find:
+#     paths: /root/openstack-chef/cookbooks/
+#     recurse: yes
+#     patterns: "*registration.rb"
+#   register: identity_registration_recipes
 
-- name: Remove duplicate path from auth_url
-  lineinfile:
-    path: "{{ item.path }}"
-    regexp: 'openstack_auth_url:\s+"#{auth_url}\/auth\/tokens",'
-    line: 'openstack_auth_url:     "#{auth_url}",'
-  with_items: "{{identity_registration_rb['files']}}"
+# - name: Remove duplicate path from auth_url in registration recipes
+#   lineinfile:
+#     path: "{{ item.path }}"
+#     regexp: 'openstack_auth_url:\s+"#{auth_url}\/auth\/tokens",'
+#     line: 'openstack_auth_url:     "#{auth_url}",'
+#   with_items: "{{identity_registration_recipes['files']}}"
 
 - name: find openstack-common python.rb
   find:
@@ -191,14 +196,15 @@
     name: erlang 
   when: ansible_os_family == 'RedHat'
 
-- name: verify rdma-core pkgs installed (mlnx src obsoletes them)
-  yum:
-    name: ['rdma-core', 'rdma-core-devel']
-  when: ansible_os_family == 'RedHat'
-
 - name: Install python api pre-requisites
   pip:
     name: ['pycparser','cffi']
+  when: ansible_os_family == 'Debian'
+
+- name: Install python api pre-requisite RPMs
+  yum:
+    name: ['python-pycparser', 'python-cffi']
+  when: ansible_os_family == 'RedHat'
 
 - name: Update the multinode-controller role - VPP
   template:

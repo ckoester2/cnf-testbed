@@ -209,7 +209,13 @@
   service:
     state: restarted
     name: nova-compute
-  when: not host_0_address == inventory_hostname
+  when: not host_0_address == inventory_hostname and ansible_os_family == 'Debian'
+
+- name: restart services on compute
+  service:
+    name: openstack-nova-compute
+    state: restarted
+  when: not host_0_address == inventory_hostname and ansible_os_family == 'RedHat'
 
 - name: start vpp and vpp-agent
   service:
