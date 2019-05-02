@@ -117,33 +117,33 @@
 #  command: ip l s dev {{vlan_interface}} down
 #  ignore_errors: true
 
-- name: Install ethtool
-  apt:
-    name: ethtool
-  when: ansible_os_family == "Debian"
+# - name: Install ethtool
+#   apt:
+#     name: ethtool
+#   when: ansible_os_family == "Debian"
 
 # Create veth pair for uplink
 # source: https://github.com/midonet/ansible-midonet-gateway/blob/master/tasks/static_uplink.yml
-- name: Grab ip link status
-  command: ip link
-  register: ip_link
-  changed_when: False
+# - name: Grab ip link status
+#   command: ip link
+#   register: ip_link
+#   changed_when: False
 
-- name: Create veth pair
-  command: ip link add vpp0 type veth peer name uplink
-  when: '"vpp0" not in ip_link.stdout'
+# - name: Create veth pair
+#   command: ip link add vpp0 type veth peer name uplink
+#   when: '"vpp0" not in ip_link.stdout'
 
-- name: Set uplink up
-  command: ip link set uplink up
-  when: '"vpp0" not in ip_link.stdout'
+# - name: Set uplink up
+#   command: ip link set uplink up
+#   when: '"vpp0" not in ip_link.stdout'
 
-- name: Set vpp0 up
-  command: ip link set vpp0 up
-  when: '"vpp0" not in ip_link.stdout'
+# - name: Set vpp0 up
+#   command: ip link set vpp0 up
+#   when: '"vpp0" not in ip_link.stdout'
 
-- name: Disable rx/tx checksumming on uplink
-  command: ethtool -K uplink rx off tx off
-  when: '"vpp0" not in ip_link.stdout'
+# - name: Disable rx/tx checksumming on uplink
+#   command: ethtool -K uplink rx off tx off
+#   when: '"vpp0" not in ip_link.stdout'
 
 - name: add vpp-agent script
   template:

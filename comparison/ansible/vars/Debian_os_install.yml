@@ -1,4 +1,4 @@
 ---
-vpp_ver: 1904
+vpp_ver: 1901
 # TODO: rename vpp_branch to vpp_plugins_branch
-vpp_branch: 'master'
+vpp_branch: '19.03'
