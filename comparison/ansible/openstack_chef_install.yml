@@ -23,7 +23,7 @@
   - name: set vpp interface name for Mellanox
     set_fact:
       vpp_interface: TwentyFiveGigabitEthernet5e/0/1
-      vpp_src: true
+      vpp_src: "{{ vpp_ver < 1904 }}"
     when: mellanox.rc == 0
 
   - name: set vpp interface name for Intel

@@ -3,6 +3,28 @@
   set_fact:
     host_0_address: "{{hostvars[groups['all'][0]].ansible_bond0.ipv4.address}}"
 
+- name: Install rdma deps Debian
+  apt:
+    name: ['rdma-core']
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Install rdma deps Centos
+  yum:
+    name: ['rdma-core', 'rdma-core-devel']
+    state: present
+  when: ansible_os_family == "RedHat"
+
+- name: Start RDMA service Ubuntu
+  command: modprobe ib_uverbs
+  when: ansible_os_family == "Debian"
+
+- name: Start RDMA service centos
+  systemd:
+    name: rdma-load-modules@rdma
+    state: started
+  when: ansible_os_family == "RedHat"
+
 - name: Add packagecloud gpg key
   apt_key:
     url: https://packagecloud.io/fdio/{{vpp_ver}}/gpgkey
