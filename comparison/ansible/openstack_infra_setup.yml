@@ -110,6 +110,6 @@
       when: ansible_os_family == 'Debian'
     - role: packet_vlan_enable
       when: ansible_bond0.slaves[1] is defined
-    - role: mellanox_src_install
-      when: mellanox.rc == 0 and not ansible_distribution_release == 'xenial'
+    # - role: mellanox_src_install
+    #   when: mellanox.rc == 0 and not ansible_distribution_release == 'xenial'
     - role: grub_openstack

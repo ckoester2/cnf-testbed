@@ -22,7 +22,7 @@
 
   - name: set vpp interface name for Mellanox
     set_fact:
-      vpp_interface: TwentyFiveGigabitEthernet5e/0/1
+      vpp_interface: "{{ 'TwentyFiveGigabitEthernet5e/0/1' if vpp_ver < 1904 else 'rdma-0' }}"
       vpp_src: "{{ vpp_ver < 1904 }}"
     when: mellanox.rc == 0
 

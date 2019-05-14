@@ -5,7 +5,7 @@
 
 - name: Install rdma deps Debian
   apt:
-    name: ['rdma-core']
+    name: ['rdma-core', 'libmlx5-1', 'infiniband-diags', 'ibutils', 'ibverbs-utils', 'rdmacm-utils', 'perftest']
     state: present
   when: ansible_os_family == "Debian"
 
