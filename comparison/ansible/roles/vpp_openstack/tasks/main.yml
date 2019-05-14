@@ -257,3 +257,36 @@
     state: restarted
     name: "{{item}}"
   with_items: ['vpp','vpp-agent'] 
+
+- name: Wait for vppctl to respond
+  shell: vppctl show version
+  register: vpp_shell_test
+  until: vpp_shell_test.rc == 0
+  retries: 5
+  delay: 10
+
+- name: Get vpp ints
+  command: vppctl show int
+  register: vpp_interfaces
+
+- debug:
+    var: vpp_interfaces
+
+- name: Set up vpp rdma interface to nic
+  shell: vppctl create int rdma host-if enp94s0f1 name rdma-0
+  # when: "'rdma-0' not in vpp_interfaces.stdout"
+
+- name: Set rdma interface state UP
+  shell: vppctl set interface state rdma-0 up
+  # when: "'rdma-0' not in vpp_interfaces.stdout"
+
+- name: Set IP address on rdma interface
+  shell: vppctl set interface ip address rdma-0 1.1.1.2/24
+  # when: "'rdma-0' not in vpp_interfaces.stdout"
+
+- name: Get vpp ints after create
+  command: vppctl show int
+  register: vpp_interfaces
+
+- debug:
+    var: vpp_interfaces
