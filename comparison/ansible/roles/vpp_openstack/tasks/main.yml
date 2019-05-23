@@ -281,7 +281,7 @@
   # when: "'rdma-0' not in vpp_interfaces.stdout"
 
 - name: Set IP address on rdma interface
-  shell: vppctl set interface ip address rdma-0 1.1.1.2/24
+  shell: "vppctl set interface ip address rdma-0 {{ '1.1.1.2' | ipmath(groups['all'].index(inventory_hostname)) }}/24"
   # when: "'rdma-0' not in vpp_interfaces.stdout"
 
 - name: Get vpp ints after create
