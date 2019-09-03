@@ -99,8 +99,8 @@
 - name: install new vpp python api pre-req vpp_ver 19.04+ into python 2.7
   pip:
     name: aenum
-    executable: pip2.7
-  when: vpp_ver >= 1904
+    executable: pip2
+  when: vpp_ver >= 1904 and not vpp_src
 
 - name: install openstack networking-vpp plugin
   pip:
