@@ -82,3 +82,11 @@ Currently known issues:
     RX packet count but zero TX packet counter).
 
   - Reading the actual lower-layer script output is currently cumbersome.
+
+  - When executing the `run_test` role for the *first* time, RX packets
+    are counted but TX packets are not, resulting in a Python
+    `ZeroDivisionError`. Restarting the nfvbench container *after* that first
+    run, and then re-running, results in correct statistics. (However,
+    restarting the container *before* the first run has no effect).
+    Need to review contents of run_test script to see what is happening
+    there.
