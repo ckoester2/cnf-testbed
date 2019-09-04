@@ -1,0 +1,3 @@
+---
+dependencies:
+  - role: util/packet_project_name

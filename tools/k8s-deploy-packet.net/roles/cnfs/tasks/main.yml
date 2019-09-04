@@ -1,0 +1,48 @@
+---
+- name: Update MAC addresses in deploy_cnfs file
+  lineinfile:
+    path: /root/cnf-testbed/comparison/ansible/deploy_cnfs.yml
+    line: '      - "{{ item.hwaddr }}"'
+    regexp: '^      - "({{ item.sample_hwaddr }}|{{ item.hwaddr }})"'
+  loop_control:
+    label: "{{ item.nic }}, {{ item.hwaddr }}"
+  with_items:
+    - { 'nic': 'nic1', 'hwaddr': '{{ pktgen_mac1 }}', 'sample_hwaddr': 'e4:43:4b:2e:9f:e2'}
+    - { 'nic': 'nic2', 'hwaddr': '{{ pktgen_mac2 }}', 'sample_hwaddr': 'e4:43:4b:2e:9f:e3'}
+
+- name: Retrieve Packet project device details
+  uri:
+    url: https://api.packet.net/projects/{{ packet.project_id }}/devices
+    method: GET
+    headers:
+      Accept: application/json
+      X-Auth-Token: "{{ packet.auth_token }}"
+  register: packet_devices
+
+# Couldn't get this to work using json_query. Reverting to the old-fasioned way...
+- name: Retrieve K8s worker public IP
+  set_fact:
+    k8s_worker_ip: '{{ packet_devices.json.devices |
+      selectattr("hostname", "equalto", deploy_name ~ "-worker-1." ~ deploy_name ~ ".packet.local") |
+      map(attribute="ip_addresses") |
+      first |
+      selectattr("address_family", "equalto", 4) |
+      selectattr("public", "equalto", true) |
+      map(attribute="address") |
+      first }}'
+
+# Test connectivity and populate known_hosts file
+- name: SSH from workstation container to k8s worker
+  command: docker exec cnfdeploytools ssh -o StrictHostKeyChecking=False {{ k8s_worker_ip }} /bin/true
+
+- name: Run CNF deploy playbook
+  shell: |
+    docker exec \
+      --workdir /ansible \
+      cnfdeploytools \
+      ansible-playbook -i '{{ k8s_worker_ip }},' -e use_case={{ cnfs.use_case }} {{ cnfs.k8s | ternary('-e k8s=True ', '') }} deploy_cnfs.yml > /tmp/deploy_cnfs.log 2>&1
+
+# FIXME: Need to understand why -- but it seems we ALWAYS need to restart nfvbench at this point
+- name: Restart nfvbench container
+  command:
+    ssh -o StrictHostKeyChecking=False {{ pktgen.hostname }} docker restart nfvbench

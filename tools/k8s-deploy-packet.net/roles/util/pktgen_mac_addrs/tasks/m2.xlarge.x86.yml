@@ -1,0 +1,16 @@
+---
+# FIXME: Does this still work after the NICs have been attached to VPP?
+- name: Fetch NIC1 MAC address
+  command: ssh -o StrictHostKeyChecking=False {{ pktgen.hostname }} cat /sys/bus/pci/devices/0000:5e:00.4/net/enp94s0f4/address
+  changed_when: False
+  register: _nic1
+
+- name: Fetch NIC2 MAC address
+  command: ssh -o StrictHostKeyChecking=False {{ pktgen.hostname }} cat /sys/bus/pci/devices/0000:5e:00.5/net/enp94s0f5/address
+  changed_when: False
+  register: _nic2
+
+- name: Set MAC address variables
+  set_fact:
+    pktgen_mac1: "{{ _nic1.stdout }}"
+    pktgen_mac2: "{{ _nic2.stdout }}"

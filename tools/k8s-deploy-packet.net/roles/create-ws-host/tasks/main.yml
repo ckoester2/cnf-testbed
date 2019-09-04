@@ -1,0 +1,18 @@
+---
+- name: Create workstation
+  packet_device:
+    auth_token: "{{ packet.auth_token }}"
+    project_id: "{{ packet.project_id }}"
+    facility: "{{ packet.facility }}"
+    hostnames: "{{ workstation.hostname }}"
+    operating_system: "{{ workstation.operating_system }}"
+    plan: "{{ workstation.plan }}"
+    state: active
+  register: _workstation
+
+- name: Add workstation to Ansible inventory
+  add_host:
+    name: "{{ workstation.hostname }}"
+    groups: workstation
+    ansible_ssh_host: "{{ _workstation.devices[0].public_ipv4 }}"
+    ansible_ssh_user: root

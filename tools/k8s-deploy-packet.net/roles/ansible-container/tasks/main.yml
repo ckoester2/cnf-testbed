@@ -1,0 +1,28 @@
+---
+# Spawn the cnfdeploytools docker container. Contrary to the documentation (which brings up the container
+# as a foreground process), we spawn it as a daemon, using an infinite sleep as command. This allows
+# access to the container using "docker exec" commands.
+#
+# We also set a few additional environments that are referenced at other points in the documentation, but
+# actually can be set right at the start of the container as they remain static. Plus, we mount the kubeconfig
+# file separately which avoids the need to copy it between directories.
+
+- name: Run CNF Deploy Tools docker container
+  docker_container:
+    name: cnfdeploytools
+    env:
+      PACKET_API_TOKEN: "{{ packet.auth_token }}"
+      PACKET_FACILITY: "{{ packet.facility }}"
+      DEPLOY_ENV: "{{ deploy_env }}"
+      SERVER_LIST: "{{ pktgen.hostname }}"
+      PROJECT_NAME: "{{ packet_project_name }}"
+      K8S_AUTH_KUBECONFIG: /kubeconfig
+    volumes:
+      - /root/cnf-testbed/comparison/ansible:/ansible
+      - /root/.ssh/id_rsa:/root/.ssh/id_rsa
+      - /root/cnf-testbed/tools/data/kubeconfig:/kubeconfig:ro
+    entrypoint:
+      - /bin/sleep
+      - infinity
+    image: "cnfdeploytools:latest"
+    state: started

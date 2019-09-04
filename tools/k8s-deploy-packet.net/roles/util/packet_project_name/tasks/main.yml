@@ -1,0 +1,17 @@
+---
+- name: Look up project name
+  uri:
+    url: https://api.packet.net/projects
+    method: GET
+    headers:
+      Accept: application/json
+      X-Auth-Token: "{{ packet.auth_token }}"
+  register: packet_projects
+
+- name: Set project name
+  set_fact:
+    packet_project_name: "{{ packet_projects.json | json_query('projects[?id==`' + packet.project_id + '`].name') | first }}"
+
+- debug:
+    var: packet_project_name
+    verbosity: 1

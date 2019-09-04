@@ -1,0 +1,110 @@
+---
+# Implements the "Prepare workstation / jump server" section of
+# https://github.com/cncf/cnf-testbed/blob/master/docs/Deploy_K8s_CNF_Testbed.md.
+
+- name: Update cache and install dependency packages
+  apt:
+    update_cache: yes
+    name:
+      - git
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg-agent
+      - software-properties-common
+
+      # Required for Ansible's "docker" and "docker_image" modules
+      - python-docker
+
+      # Required in order to install additional PIP packages
+      - python-pip
+
+- name: Add Docker APT key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker APT repository
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    state: present
+
+- name: Install Docker CE
+  apt:
+    update_cache: yes
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+
+- name: Install Kubectl
+  get_url:
+    url: "https://storage.googleapis.com/kubernetes-release/release/{{ lookup('url', 'https://storage.googleapis.com/kubernetes-release/release/stable.txt') }}/bin/linux/amd64/kubectl"
+    dest: /usr/local/bin/kubectl
+    mode: 0755
+
+- name: Clone CNF testbed
+  git:
+    repo: https://github.com/cncf/cnf-testbed.git
+    dest: /root/cnf-testbed
+
+- name: Create SSH keypair
+  openssh_keypair:
+    path: /root/.ssh/id_rsa
+    size: 4096
+
+# Want to read and print the public SSH key. As Ansible file lookups are on Ansible control host (and not on
+# the remote machine), use a shell command here
+- name: Read SSH public key
+  command: cat /root/.ssh/id_rsa.pub
+  changed_when: False
+  register: _ssh_pubkey
+
+- name: Add SSH public key to packet.net
+  uri:
+    url: https://api.packet.net/projects/{{ packet.project_id }}/ssh-keys
+    method: POST
+    headers:
+      Accept: application/json
+      X-Auth-Token: "{{ packet.auth_token }}"
+    body:
+      label: "{{ inventory_hostname }}"
+      key: "{{ _ssh_pubkey.stdout }}"
+    body_format: json
+    status_code:
+      # FIXME: Not sure about the error handling on this one. It seems that packet.net returns
+      # 404 when the key is first created, and 422 when the key already exists. But why does
+      # Packet return 404 for creating a new key? And how do we differentiate this from a legitimate
+      # 404 such as a mis-spelled URL?
+      # FIXME: Also, need to review idempotency here. If the label already exists but with a
+      # different key - what will the packet.net response be?
+      - 404
+      - 422
+  register: _create_ssh_key
+  changed_when: _create_ssh_key.status == 404
+
+- name: Build packet_api Docker image
+  docker_image:
+    source: build
+    build:
+      path: /root/cnf-testbed/tools/packet_api
+      pull: yes
+    name: ubuntu:packet_api
+
+- name: Build CNF Deploy Tools Docker image
+  docker_image:
+    source: build
+    build:
+      path: /root/cnf-testbed/tools/deploy
+      pull: no
+    name: cnfdeploytools:latest
+
+- name: Update resolv.conf
+  copy:
+    content: |
+      nameserver 147.75.69.23
+      nameserver 8.8.8.8
+    dest: /etc/resolv.conf
+    mode: 0644
+  notify: Restart ResolveD
+- meta: flush_handlers

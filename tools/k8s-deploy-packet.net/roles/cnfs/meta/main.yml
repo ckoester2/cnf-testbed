@@ -1,0 +1,3 @@
+---
+dependencies:
+  - role: util/pktgen_mac_addrs

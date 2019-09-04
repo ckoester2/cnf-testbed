@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  gather_facts: False
+
+  roles:
+    - create-ws-host
+
+- hosts: workstation
+  roles:
+    - workstation
+    - k8s
+    - pktgen
+    - cnfs
+    - run_test
+    - run_test_2

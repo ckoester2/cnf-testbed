@@ -1,0 +1,53 @@
+---
+- name: Verify worker NIC type
+  assert:
+    that:
+      - worker_nic_type in ['Mellanox', 'Intel']
+    fail_msg: |
+      Worker NIC type "{{ worker_nic_type }}", must be either "Mellanox" or "Intel"
+
+- name: Fetch details of k8s-cluster.env.example file
+  stat:
+    path: /root/cnf-testbed/tools/k8s-cluster.env.example
+    checksum_algorithm: sha256
+  register: _k8s_checksum_file
+
+#
+# Crude way of checking that the example k8s configuration env file is of the version
+# we are expecting. If it isn't, then likely set of environment variables for script invokation
+# will need updating.
+#
+- name: Assert that the version of k8s sample file is as expected
+  assert:
+    that:
+      - _k8s_checksum_file.stat.checksum == "8d63ea7fe93b8ade3d276a71c61312e21d9e156164172a484af6d96f5422be6f"
+    fail_msg: |
+      File /root/cnf-testbed/tools/k8s-cluster.env.example as checked out from cnf-testbed, is not of the
+      expected version. The environment variables in this script may need updating.
+
+# FIXME: Need to automate step re 'vswitch_container' config
+
+- name: Run k8s cluster deploy script -- this will take a while.
+  shell: |
+    ./deploy_k8s_cluster.sh > /tmp/deploy_k8s_cluster.log 2>&1 \
+      && touch /root/deploy_k8s_cluster_complete
+  args:
+    chdir: /root/cnf-testbed/tools
+    creates: /root/deploy_k8s_cluster_complete
+  environment:
+    NAME: "{{ deploy_name }}"
+    K8S_DEPLOY_ENV: "{{ deploy_env }}"
+    MASTER_NODE_COUNT: 1
+    WORKER_NODE_COUNT: 1
+    MASTER_NODE_TYPE: t1.small
+    WORKER_NODE_TYPE: "{{ (worker_nic_type=='Mellanox') | ternary('m2.xlarge.x86', 'n2.xlarge.x86') }}"
+    NODE_OS: ubuntu_18_04
+    PACKET_FACILITY: "{{ packet.facility }}"
+    ETCD_VERSION: v3.2.8
+    CNI_VERSION: v0.6.0
+    K8S_RELEASE: v1.12.2
+    PLAYBOOK: "{{ (worker_nic_type=='Mellanox') | ternary('k8s_worker_vswitch_mellanox.yml', 'k8s_worker_vswitch_quad_intel.yml') }}"
+    PACKET_AUTH_TOKEN: "{{ packet.auth_token }}"
+    PACKET_PROJECT_ID: "{{ packet.project_id }}"
+    PACKET_PROJECT_NAME: "{{ packet_project_name }}"
+  register: _deploy_k8s_result

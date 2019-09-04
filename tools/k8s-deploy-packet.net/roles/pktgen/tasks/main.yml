@@ -1,0 +1,52 @@
+---
+- name: Add packet python module
+  pip:
+    name: packet-python
+    state: present
+
+- name: Create Packet Generator
+  packet_device:
+    auth_token: "{{ packet.auth_token }}"
+    project_id: "{{ packet.project_id }}"
+    facility: "{{ packet.facility }}"
+    hostnames: "{{ pktgen.hostname }}"
+    operating_system: "{{ pktgen.operating_system }}"
+    plan: "{{ pktgen.plan }}"
+    state: active
+  register: _packet_gen
+
+- debug:
+    var: _packet_gen.devices[0].public_ipv4
+    verbosity: 1
+
+- name: Add Packet Generator SSH key to Docker container
+  command: "docker exec cnfdeploytools ssh -o StrictHostKeyChecking=False {{ _packet_gen.devices[0].public_ipv4 }} /bin/true"
+
+# FIXME: Need to check how idempotent the playbooks we are calling here are...
+- name: Run Packet Generator playbook in container (Mellanox) - this will take a while
+  shell:
+    docker exec \
+      --workdir /ansible \
+      cnfdeploytools \
+      ansible-playbook -i '{{ _packet_gen.devices[0].public_ipv4 }},' packet_generator.yml -e dual_mellanox=true > /tmp/deploy_packet_generator.log 2>&1 && \
+    touch /root/deploy_packet_generator_complete
+  when: pktgen.plan == "m2.xlarge.x86"
+  args:
+    creates: /root/deploy_packet_generator_complete
+
+- name: Run Packet Generator playbook in container (Intel) - this will take a while
+  shell:
+    docker exec \
+      --workdir /ansible \
+      cnfdeploytools \
+      ansible-playbook -i '{{ _packet_gen.devices[0].public_ipv4 }},' packet_generator.yml -e quad_intel=true > /tmp/deploy_packet_generator.log 2>&1 && \
+    touch /root/deploy_packet_generator_complete
+  when: pktgen.plan == "n2.xlarge.x86"
+  args:
+    creates: /root/deploy_packet_generator_complete
+
+- name: Add packet generator to /etc/hosts
+  lineinfile:
+    path: /etc/hosts
+    line: "{{ _packet_gen.devices[0].public_ipv4 }}	{{ pktgen.hostname }}"
+    regexp: ".*	{{ pktgen.hostname }}"

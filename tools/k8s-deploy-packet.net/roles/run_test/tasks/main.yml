@@ -1,0 +1,10 @@
+---
+# FIXME: Need to understand why -- but it seems we ALWAYS need to restart nfvbench at this point
+- name: Restart nfvbench container
+  command:
+    ssh -o StrictHostKeyChecking=False {{ pktgen.hostname }} docker restart nfvbench
+
+- name: Run test
+  shell: |
+    ssh -t {{ pktgen.hostname }} ./run_test_kubernetes.sh > /tmp/run_test.log 2>&1
+  register: _test
