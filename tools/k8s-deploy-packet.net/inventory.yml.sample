@@ -1,0 +1,25 @@
+all:
+  vars:
+    deploy_name: "<CHANGEME: your deployment name here>"
+    deploy_env: "{{ deploy_name }}env"
+
+    worker_nic_type: Mellanox
+
+    packet:
+      auth_token: "<CHANGEME: your packet auth token>"
+      project_id: "<CHANGEME: your packet project id>"
+      facility: sjc1
+
+    workstation:
+      hostname: "{{ deploy_name }}-ws"
+      operating_system: ubuntu_18_04
+      plan: t1.small.x86
+
+    pktgen:
+      hostname: "{{ deploy_name }}-pktgen"
+      operating_system: ubuntu_16_04
+      plan: m2.xlarge.x86
+
+    cnfs:
+      use_case: 3c2n-csp
+      k8s: False
